@@ -1,4 +1,32 @@
+body{
+  margin: 0;
+  padding: 0;
+}
 #root {
+  max-width: 1920px;
+  text-align: center;
+  margin: 0 auto;
+  
+
+}
+
+ .redflag{
+  background-color: rgb(206,40,40);
+  width: 100vw;
+  height: 100vh;
+ }
+ .redflag p {
+  font-size: 50px;
+ }
+
+.onay{
+  text-align: center;
+  vertical-align: middle;
+  font-family: "Roboto condensed";
+  color: rgb(255, 255, 255);
+ 
+}
+ /* #root {
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
@@ -39,4 +67,4 @@
 
 .read-the-docs {
   color: #888;
-}
+}  */
