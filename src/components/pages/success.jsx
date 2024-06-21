@@ -1,21 +1,23 @@
 import React from 'react'
 import styled from 'styled-components'
-
-function Success() {
-  const Banner=styled.img`
-  position: fixed;
+const Banner=styled.img`
+  position: relative;
   align-items: center;
-  
- border: 1px solid black;
+  top: 50px;
+ 
   `
+function Success() {
+  
   return (
     < >
       <div className='redflag'>
-      <Banner src="../../../Assets/mile1-assets/logo.svg" ></Banner>
-      <div className='onay'>
-      <p>TEBRIKLER!</p>
-      <p>SIPARISINIZ ALINDI!</p>
-      </div>
+        <Banner src="../../../Assets/mile1-assets/logo.svg" ></Banner>
+        <div className='wrap'>
+          <div className='onay'>
+          <p>TEBRİKLER!</p>
+          <p>SİPARİŞİNİZ ALINDI!</p>
+          </div>
+        </div>
       </div>
     </>
   )

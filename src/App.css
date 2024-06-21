@@ -18,13 +18,53 @@ body{
  .redflag p {
   font-size: 50px;
  }
+.wrap{
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+}
+
 
 .onay{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  vertical-align: middle;
   font-family: "Roboto condensed";
   color: rgb(255, 255, 255);
  
+ 
+}
+.onay p {
+  margin:-10px 0;
+  padding: 0;
+}
+.orumcek{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.tepe{
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 10vh;
+  background-color:  rgb(206,40,40);
+  align-items: center;
+  justify-content: end;
+  margin: 0 0 3vw 0;
+
+}
+.yaziPartial{
+  display: flex;
+  flex-direction: column;
+  justify-self: center;
 }
  /* #root {
   max-width: 1280px;
