@@ -2,6 +2,9 @@ import React from 'react'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FormGroup, Input, Label } from 'reactstrap';
 import styled from 'styled-components'
+import Toppings from "../api/toppings"
+import { useState } from 'react';
+
 
 const ButtonX=styled.button`
   color:blue;
@@ -10,13 +13,23 @@ const ButtonX=styled.button`
   
 function OrderForm() {
   let history=useHistory();
+const [toppings,setToppings]=useState(Toppings);
 
   function Verildi (){
     console.log("tebrikler!");
     history.push("/success")
 
   }
-
+function checkMate (event) {
+  const { id, checked }=event.target;
+  
+    setToppings(pretoppings=>pretoppings.map(topping=>
+      topping.id=== parseInt(id)?{...topping,checked:checked }:topping)
+    );
+  
+   
+  
+}
 
   return (
     <div>
@@ -38,23 +51,43 @@ function OrderForm() {
             <Label>Boyut Sec </Label>
             <FormGroup >
                 <Label>Kücük</Label>
-                <Input type="radio" />
+                <Input type="radio" name='boyut' />
                 <Label>Orta </Label>
-                <Input type="radio" />
+                <Input type="radio" name='boyut' />
                 <Label>Buyuk </Label>
-                <Input type="radio" />
+                <Input type="radio" name='boyut' />
               </FormGroup>
         </FormGroup>
 
         <FormGroup className='kalin'>
           <Label for="kalinlik">Hamur Kalinligi </Label>
           <Input type='select' id="kalinlik" name='kalinlik'>
-                  <option value="kalinlik">Ekstra ince</option>
-                  <option value="kalinlik">Ince</option>
-                  <option value="kalinlik">Normal</option>
-                  <option value="kalinlik">Kalin</option> 
+                  <option value="EkstraInce">Ekstra ince</option>
+                  <option value="Ince">Ince</option>
+                  <option value="Normal">Normal</option>
+                  <option value="Kalin">Kalin</option> 
           </Input>
         </FormGroup>
+
+        <h2>Ek Malzemeler </h2>
+        {toppings.map((topping)=>(
+         <FormGroup check key={topping.id} className='malzeme'>
+      
+          <Label htmlFor={topping.id}>{topping.name}</Label>
+          <Input
+           type='checkbox' 
+           id={topping.id} 
+           checked={topping.checked||false}
+           onChange={checkMate}
+           value={topping.id}
+           />
+       </FormGroup>
+        ))}
+        <FormGroup className='sipNot'>
+          <Label htmlFor='not'>Siparis Notu</Label>
+          <Input type='textarea' name='not'placeholder='Siparişine eklemek istediğin bir not var mı?'/>
+        </FormGroup>
+        
     </FormGroup>
         <ButtonX onClick={Verildi}>Siparis Ver</ButtonX>
         </div>
