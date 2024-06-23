@@ -80,16 +80,18 @@ background: white;
   background-color: white;
   z-index: 0;
   display: flex;
-  text-align: center;
+ text-align: center;
   justify-content: space-around;
   align-items: center;
   height: 5vw;
   margin: 2px 300px;
-  
+ 
 
 }
+
 .ikonlar  img{
   width: 2vw;
+  margin-right: 3px;
 }
 
 /* ortapart */
@@ -231,7 +233,7 @@ height: 500px;
   
   align-items: center;
   height: 5vw;
-
+cursor: pointer;
   width: 940px;
   column-gap: 20px;
 }
@@ -271,7 +273,7 @@ height: 500px;
   align-items: center;
   justify-content: center;
   margin:5px auto;
-  height: 400px;
+  height: 620px;
   
 
 }
@@ -279,12 +281,14 @@ height: 500px;
   display: flex;
   justify-content: space-between;
  gap: 10px;
+ flex-wrap: wrap;
   
 }
 .sunum img{
  width: 280px;
   margin: 10px;
   object-fit:fill;
+  height: 220px;
 }
 .cardcik{
   background: white;
@@ -292,23 +296,205 @@ height: 500px;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  border: 1px solid red;
-  height: 350px;
+  
+  height: 300px;
   border-radius: 12px;
  background-color: rgb(255, 255, 255);
   
 }
 
-
 .kat{
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  
+ 
+  width: 280px;
+
+}
+.kat h4{
+  font-size: 18px;
+  font-family: "Barlow";
+  font-weight: 600;
 }
 .line{
   display: flex;
   justify-content: space-between;
+  
+  width: 280px;
+}
+.line p{
+  font-family: "Barlow";
+  font-weight: 600;
+  font-size: 14px;
+}
+.line h5{
+  font-family: "Barlow";
+  font-weight: 700;
+  font-size: 18px;
+}
+
+/* foooter kismen */
+.wholeDown {
+margin-bottom: 0;
+ width: 100vw;
+ 
+}
+.teknolojik{
+  display: flex;
+  
+  width: 48%;
+}
+
+/* sol kisim */
+.tumBina{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 40px;
+  
+}
+.tumBina h2{
+  font-family: "Londrina Solid";
+  font-weight: 400;
+  font-size: 44px;
+  color: white;
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+  left: 30px;
+}
+
+.altTabaka{
+  display: flex;
+  justify-content: center;
+  
+}
+.altTabaka img{
+width: 1.5vw;
+height: 1.5vw;
+position: relative;
+left: 30px;
+margin-right: 8px;
+
+} 
+.istanbul {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  left: 34px;
+  justify-content: baseline;
+  align-items: baseline;
+ 
+}
+.istanbul p{
+  margin: 0;
+  padding: 0;
+  font-family: "Barlow";
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+}
+.pasta{
+  display: flex;
+  position: relative;;
+  top:30px;
+}
+.pasta img{
+  width: 1.5vw;
+  height: 1.5vw;
+  position: relative;
+  left: 60px;
+}
+.pasta p{
+  margin: 0;
+  padding: 0;
+  position: relative;
+  left: 70px;
+  font-family: "Barlow";
+  font-weight: 400;
+  font-size: 14px;
+  color: white;
+
+}
+
+/* orta kisim */
+.orta{
+display:flex;
+flex-direction: column;
+margin:0 30px;
+align-items: baseline;
+width: 24vw;
+
+
+
+
+}
+.ates{
+  display: flex;
+  width: 24vw;
+  justify-content: start;
+  text-align: start;
+  align-items: end;
+}
+.ortah4{
+font-family: "Barlow";
+font-size: 20px;
+font-weight: 500;
+color: white;
+min-width:200px ;
+
+position: relative;
+top:60px;
+left: 100px;
+
+
+}
+.textler{
+
+display: flex;
+flex-direction: column;
+align-items: baseline;
+color: white;
+position: relative;
+top: 75px;
+row-gap: 5px;
+left: 100px;
+}
+.textler p{
+  font-family: "Barlow";
+  font-size: 14px;
+  font-weight: 400;
+  margin: 0;
+  padding: 0;
+  
+}
+/* sag kisim */
+.ins{
+  color: white;
+  font-family: "Barlow";
+  font-size: 20px;
+  font-weight: 500;
+}
+.ustSira{
+display: flex;
+justify-content: center;
+gap:10px;
+margin-bottom: 10px;
+}
+.altSira{
+  display: flex;
+  justify-content: center;
+  gap:10px;
+
+}
+.parti{
+  position: relative;
+  left: 240px;
+}
+.biter{
+  position: relative;
+  right: 220px;
 }
  /* #root {
   max-width: 1280px;
