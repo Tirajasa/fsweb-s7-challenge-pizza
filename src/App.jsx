@@ -13,6 +13,7 @@ function App() {
   const PosAbAciPiz=pizzaci.items.find(item=>item.ad==="Position Absolute Acı Pizza");
 
   const [selectedCategory,setSelectedCategory]=useState(pizzaci);
+  const [categoryItems, setCategoryItems] = useState([]);
   const [selectedItems,setSelectedItems]=useState(null);
   const [showed, setShowed] = useState(PosAbAciPiz);/* sectigin kategorye gore adi urun aciklama fiyat rating yorumsayisi  boyut veya buyukluk ve ek malzemeler*/ 
   const [extraTop,setExtraTop]=useState(0);
@@ -27,7 +28,9 @@ function App() {
     <>
      <Switch>
       <Route path="/home">
-        <Homeb selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
+        <Homeb selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} 
+        categoryItems={categoryItems}  setCategoryItems={setCategoryItems}
+        selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
         </Route>
       <Route path="/order">
         <OrderForm 

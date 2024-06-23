@@ -1,12 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { useHistory } from 'react-router-dom'
-import { Button, Card } from 'reactstrap'
+
 import styled from 'styled-components'
 import FooterC from '../parts/home/footer'
 import Siparisver from "../parts/home/siparisver"
-
-
+import menulist from '../api/menu'
 
 const HomeImage=styled.img`
 width: 100vw;
@@ -83,26 +82,42 @@ background-color:gray;
 
 
 function Homeb(props) {
-  const {selectedCategory,setSelectedCategory,selectedItems, setSelectedItems}=props;
+  const {selectedCategory,setSelectedCategory,selectedItems, setSelectedItems, setCategoryItems,categoryItems}=props;
+  
   const [clicked,setClicked]=useState("Pizza")
+
   let history=useHistory()
 
 function buttonHandler(){
 console.log("buttonclicked!");
 history.push("/order");
 }
+
 function iconaTikla(event){
   history.push("/home#icons");
   setClicked(event.target);
   setSelectedCategory(event.target);
 }
-
 function categorySec (event){
  
   setClicked(event.currentTarget);
-  setSelectedCategory(event.currentTarget);
+  setSelectedCategory(event.currentTarget.dataset.category);
 }
+useEffect(()=>{
+  if(selectedCategory){
+    fetchSelectedItems(selectedCategory)
+  }
 
+},[selectedCategory]);
+function fetchSelectedItems(){
+  
+  const selectedItems = menulist.find(category => category.category === selectedCategory);
+  if (selectedItems) {
+    setCategoryItems(selectedItems.items);
+  } else {
+    console.error("İlgili kategori bulunamadı:", selectedCategory);
+  }
+}
   return (
    <>
     <div className='orumcek'>
@@ -168,21 +183,21 @@ function categorySec (event){
 
         <div className='saydam' >
               <div className="bot">
-                      <div class="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/1.svg"/><p>Ramen</p></div>
-                      <div class="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/2.svg"/><p>Pizza</p></div>
-                      <div class="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/3.svg"/><p>Burger</p></div>
-                      <div class="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/4.svg"/><p>French Fries</p></div>
-                      <div class="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/5.svg"/><p>Fast food</p></div>
-                      <div class="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/6.svg"/><p>Soft Drinks</p></div>
+                      <div data-category="Ramenler" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/1.svg"/><p>Ramen</p></div>
+                      <div data-category="Pizzalar" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/2.svg"/><p>Pizza</p></div>
+                      <div data-category="Burgerler" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/3.svg"/><p>Burger</p></div>
+                      <div data-category="FrenchFries" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/4.svg"/><p>French Fries</p></div>
+                      <div data-category="Fast Food" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/5.svg"/><p>Fast food</p></div>
+                      <div data-category="FizzyDrinks" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/6.svg"/><p>Soft Drinks</p></div>
               </div>
         </div >
     
 
         <div className="ortu">
                 <div className="sunum">
-                {selectedCategory.items.map((item, index) => (
+                {categoryItems.map((item, index) => (
                     <div className="cardcik" onClick={(e)=>setSelectedItems(e.target.value)} key={item.id}>
-                      
+                        
                         <img src={item.resim} alt={item.ad} />
                         <div className="kat" >
                       
@@ -190,7 +205,7 @@ function categorySec (event){
                           <div className="line">
                                   <p>{item.rate}</p>
                                   <p>({item.yorum})</p>
-                                  <h5>{item.price}</h5>
+                                  <h5>{item.price}₺</h5>
                           </div>
                         </div>
                     
