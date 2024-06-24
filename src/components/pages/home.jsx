@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef  } from 'react'
 
 import { useHistory } from 'react-router-dom'
 
@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import FooterC from '../parts/home/footer'
 import Siparisver from "../parts/home/siparisver"
 import menulist from '../api/menu'
+
 
 const HomeImage=styled.img`
 width: 100vw;
@@ -84,8 +85,8 @@ background-color:gray;
 function Homeb(props) {
   const {selectedCategory,setSelectedCategory,selectedItems, setSelectedItems, setCategoryItems,categoryItems}=props;
   
-  const [clicked,setClicked]=useState("Pizza")
-
+ 
+  const iconsRef = useRef(null);
   let history=useHistory()
 
 function buttonHandler(){
@@ -93,15 +94,23 @@ console.log("buttonclicked!");
 history.push("/order");
 }
 
-function iconaTikla(event){
-  history.push("/home#icons");
-  setClicked(event.target);
-  setSelectedCategory(event.target);
+function iconaTikla(category){
+
+
+  setSelectedCategory(category);
+  fetchSelectedItems(category);
+  scrollToIcons()
+  
 }
-function categorySec (event){
- 
-  setClicked(event.currentTarget);
-  setSelectedCategory(event.currentTarget.dataset.category);
+function categorySec (category){
+
+  setSelectedCategory(category);
+  fetchSelectedItems(category);
+}
+function scrollToIcons() {
+  if (iconsRef.current) {
+    iconsRef.current.scrollIntoView({ behavior: 'smooth' });
+  }
 }
 useEffect(()=>{
   if(selectedCategory){
@@ -109,15 +118,27 @@ useEffect(()=>{
   }
 
 },[selectedCategory]);
-function fetchSelectedItems(){
+function fetchSelectedItems(category){
   
   const selectedItems = menulist.find(category => category.category === selectedCategory);
   if (selectedItems) {
     setCategoryItems(selectedItems.items);
+    console.log(`"${category}" kategorisi için menüler başarıyla yüklendi.`)
   } else {
-    console.error("İlgili kategori bulunamadı:", selectedCategory);
+    console.error(`İlgili kategori bulunamadı: ${category}`, selectedCategory);
   }
 }
+function clickedItems (event){
+  setSelectedItems(event.target.value);
+  history.push("/order");
+  console.log("Paketlenen menulerden bir urune tiklandi")
+}
+useEffect(()=>{
+  if(selectedItems){
+    clickedItems(event)
+    console.log("sayfaya tiklanan urun bilgileri geliyor(toppings,aciklama, yorumlar vs)")
+  }
+},[selectedItems])
   return (
    <>
     <div className='orumcek'>
@@ -136,13 +157,13 @@ function fetchSelectedItems(){
       </YaziContainer>
       </div>
       <div className='bosluk'>
-      <div className='ikonlar' onClick={iconaTikla} >
-        <div><img src="../../../Assets//mile2-aseets/icons/1.svg"/><span>YENI!Kore</span></div>
-        <div><img src="../../../Assets//mile2-aseets/icons/2.svg"/><span>Pizza</span></div>
-        <div><img src="../../../Assets//mile2-aseets/icons/3.svg"/><span>Burger</span></div>
-        <div><img src="../../../Assets//mile2-aseets/icons/4.svg"/><span>Kizartmalar</span></div>
-        <div><img src="../../../Assets//mile2-aseets/icons/5.svg"/><span>Fast food</span></div>
-        <div><img src="../../../Assets//mile2-aseets/icons/6.svg"/><span>Gazli Icecek</span></div>
+      <div className='ikonlar'  >
+        <div onClick={() => iconaTikla("Ramenler")}><img src="../../../Assets//mile2-aseets/icons/1.svg"/><span>YENI!Kore</span></div>
+        <div onClick={() => iconaTikla("Pizzalar")}><img src="../../../Assets//mile2-aseets/icons/2.svg"/><span>Pizza</span></div>
+        <div onClick={() => iconaTikla("Burgerler")}><img src="../../../Assets//mile2-aseets/icons/3.svg"/><span>Burger</span></div>
+        <div onClick={() => iconaTikla("FrenchFries")}><img src="../../../Assets//mile2-aseets/icons/4.svg"/><span>Kizartmalar</span></div>
+        <div onClick={() => iconaTikla("Fast Food")}><img src="../../../Assets//mile2-aseets/icons/5.svg"/><span>Fast food</span></div>
+        <div onClick={() => iconaTikla("FizzyDrinks")}><img src="../../../Assets//mile2-aseets/icons/6.svg"/><span>Gazli Icecek</span></div>
         </div>
       </div>
       <div className='ortaPart'>
@@ -175,7 +196,7 @@ function fetchSelectedItems(){
         </div>
         </div>
       
-      <div id='icons'>
+      <div id='icons'ref={iconsRef}>
         <h3 className="satisfy" >en çok paketlenen menüler</h3>
         <h2>Acıktıran Kodlara Doyuran Lezzetler</h2>
       
@@ -183,20 +204,20 @@ function fetchSelectedItems(){
 
         <div className='saydam' >
               <div className="bot">
-                      <div data-category="Ramenler" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/1.svg"/><p>Ramen</p></div>
-                      <div data-category="Pizzalar" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/2.svg"/><p>Pizza</p></div>
-                      <div data-category="Burgerler" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/3.svg"/><p>Burger</p></div>
-                      <div data-category="FrenchFries" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/4.svg"/><p>French Fries</p></div>
-                      <div data-category="Fast Food" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/5.svg"/><p>Fast food</p></div>
-                      <div data-category="FizzyDrinks" className="bale" onClick={categorySec}><img src="../../../Assets//mile2-aseets/icons/6.svg"/><p>Soft Drinks</p></div>
+                      <div data-category="Ramenler" className="bale" onClick={() => categorySec("Ramenler")}><img src="../../../Assets//mile2-aseets/icons/1.svg"/><p>Ramen</p></div>
+                      <div data-category="Pizzalar" className="bale" onClick={() => categorySec("Pizzalar")}><img src="../../../Assets//mile2-aseets/icons/2.svg"/><p>Pizza</p></div>
+                      <div data-category="Burgerler" className="bale" onClick={() => categorySec("Burgerler")}><img src="../../../Assets//mile2-aseets/icons/3.svg"/><p>Burger</p></div>
+                      <div data-category="FrenchFries" className="bale" onClick={() => categorySec("FrenchFries")}><img src="../../../Assets//mile2-aseets/icons/4.svg"/><p>French Fries</p></div>
+                      <div data-category="Fast Food" className="bale" onClick={() => categorySec("Fast Food")}><img src="../../../Assets//mile2-aseets/icons/5.svg"/><p>Fast food</p></div>
+                      <div data-category="FizzyDrinks" className="bale" onClick={() => categorySec("FizzyDrinks")}><img src="../../../Assets//mile2-aseets/icons/6.svg"/><p>Soft Drinks</p></div>
               </div>
         </div >
-    
+
 
         <div className="ortu">
                 <div className="sunum">
                 {categoryItems.map((item, index) => (
-                    <div className="cardcik" onClick={(e)=>setSelectedItems(e.target.value)} key={item.id}>
+                    <div className="cardcik" onClick={clickedItems} key={item.id}>
                         
                         <img src={item.resim} alt={item.ad} />
                         <div className="kat" >

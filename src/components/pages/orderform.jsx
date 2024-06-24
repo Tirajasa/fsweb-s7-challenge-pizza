@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { FormGroup, Input, Label } from 'reactstrap';
 import styled from 'styled-components'
 import MenuFis from '../parts/order/MenuFis';
-
+import FooterC from '../parts/home/footer';
 
 
 
@@ -32,7 +32,7 @@ color: #000000;
 function OrderForm(props) {
 const {numberx,setNumberx,showed,setShowed,
 setBuyukluk,extraTop,setExtraTop,menu,setMenu,fis,setFis,
-kalinlik,setKalinlik,buyukluk,selectedItem,setSelectedItem}=props;
+kalinlik,setKalinlik,buyukluk,selectedItems,setSelectedItems}=props;
 
   let history=useHistory();
  
@@ -67,6 +67,10 @@ function SipVerildi (event){
  
 
 }
+function icerikGelsin(selectedItems){
+  setShowed(selectedItems);
+}
+
 
   return (
    
@@ -125,7 +129,8 @@ function SipVerildi (event){
         </FormGroup>
 
         <h2>Ek Malzemeler </h2>
-        {toppings.map((topping)=>(
+        {
+        willSelectedToppings.map((topping)=>(
          <FormGroup check key={topping.id} className='malzeme'>
       
           <Label htmlFor={topping.id}>{topping.ad}</Label>
@@ -151,7 +156,7 @@ function SipVerildi (event){
         
     </FormGroup>
         <SipBut onClick={SipVerildi}>Siparis Ver</SipBut>
-     
+        <FooterC/>
     </>
   
   )
