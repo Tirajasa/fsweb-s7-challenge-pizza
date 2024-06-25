@@ -100,28 +100,38 @@ useEffect(()=>{
   return (
    
     <>
-   
+   <div className='arkasari'>
      <div className='OredBan'>
-      <img src="" alt="flag" />
-      <span className='anasayfa'>Anasayfa-<span className='sipo'>Sipariş Oluştur</span></span>
+
+      <img src="../../../Assets/mile1-assets/logo.svg" alt="flag" />
+      <div className='ince'>
+        <span className='anasayfa'>Anasayfa-</span><span className='sipo'>Sipariş Oluştur</span>
+        
+      </div>
      </div>
      <div className='OformLong'>
+      <img src="../../../Assets/mile2-aseets/pictures/form-banner.png" alt="yarim pizza" />
      {showed && (
       <div className='absolute'>
-            <h3>{showed.ad}₺</h3>
+            <h3>{showed.ad}</h3>
         <div className='price-number'>
             <p>{showed.price}₺</p>
+            <div className='sessiz'>
             <p>{showed.rate}</p>
-            <p>{showed.yorum}</p>
+            <p>({showed.yorum})</p>
+            </div>
           </div>
+          <div className='acikla'>
           <p>{showed.aciklama}</p>
+          </div>
         </div>
          )}
       </div>
-   
+      </div>
     <FormGroup>
         <FormGroup className='boyut'>
-            <Label>Boyut Sec </Label>
+            <h3>Boyut Sec </h3>
+            <div className='boy'>
             <FormGroup >
 
                 <Label>Küçük</Label>
@@ -138,7 +148,8 @@ useEffect(()=>{
                 <Input type="radio" name='boyut' value="büyük"
                 checked={buyukluk === "büyük"}
                 onChange={(e) => setBuyukluk(e.target.value)} />
-              </FormGroup>
+            </FormGroup>
+            </div>
         </FormGroup>
 
         <FormGroup  className='kalin'>

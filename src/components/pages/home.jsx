@@ -143,7 +143,7 @@ useEffect(()=>{
   }
 },[selectedItems])
   return (
-   <>
+   <div className='roothome'>
     <div className='orumcek'>
       <HomeImage src="../../../Assets/mile1-assets/home-banner.png" alt="home">
       </HomeImage>
@@ -171,7 +171,7 @@ useEffect(()=>{
       </div>
       <div className='ortaPart'>
         <div className='solyanres'>
-        <img  src="../../../Assets//mile2-aseets/cta/kart-1.png" alt="pizza"/>
+        <img  src="../../../Assets/mile2-aseets/cta/kart-1.png" alt="pizza"/>
        <div className="toplayici">
         <h1>Özel</h1>
         <h1>  Lezzetus</h1>
@@ -181,7 +181,7 @@ useEffect(()=>{
         </div>
         <div className='sagyanres'>
           <div className='ustres'>
-            <img src="../../../Assets//mile2-aseets/cta/kart-2.png" alt="hackathlon" />
+            <img src="../../../Assets/mile2-aseets/cta/kart-2.png" alt="hackathlon" />
             <div className="toplayici">
             <h3>Hackathlon</h3>
             <h3>Burger Menü</h3>
@@ -189,7 +189,7 @@ useEffect(()=>{
             </div>
           </div>
           <div className='altres'>
-            <img src="../../../Assets//mile2-aseets/cta/kart-3.png" alt="kurye" />
+            <img src="../../../Assets/mile2-aseets/cta/kart-3.png" alt="kurye" />
             <div className="toplayici">
             <div> <span className="red">Çoooook </span><span>hızlı </span></div>
               <p>npm gibi kurye</p>
@@ -240,7 +240,7 @@ useEffect(()=>{
         </div>
       </div>
       <FooterC></FooterC>
-    </> 
+    </div> 
   )
 }
 

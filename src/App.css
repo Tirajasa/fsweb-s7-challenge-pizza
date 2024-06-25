@@ -9,11 +9,13 @@ body{
   max-width: 1920px;
   text-align: center;
   margin: 0 auto;
-  background:#faf7f2;
+  
   
 
 }
-
+.roothome{
+  background:#faf7f2;
+}
  .redflag{
   background-color: rgb(206,40,40);
   width: 100vw;
@@ -501,6 +503,127 @@ margin-bottom: 10px;
   position: relative;
   right: 220px;
 }
+ /* order form sayfasi */
+
+ .OredBan{
+  height: 176px;
+  width: 100vw;
+  background-color: rgb(206,40,40);
+  
+  display: flex;
+  flex-direction: column;
+ justify-content: center;
+ align-items: center;
+
+ }
+ .OredBan img{
+  height: 40px;
+  width: 300px;
+  
+ }
+ .ince {
+  display: flex;
+  height: 2rem;
+  width: 450px;
+  justify-content: baseline;
+  align-items: end;
+  position: relative;
+  top: 30px;
+  
+  
+  
+ 
+
+ }
+ /* .empty {
+  height: 1rem;
+  width: 100vw;
+  border:1px solid rgb(198, 31, 159);
+ } */
+
+
+ .anasayfa{
+color: white;
+font-family: "Barlow";
+font-size: 16px;
+font-weight: 400;
+text-align: center;
+min-width: 70;
+padding: 0;
+margin: 0;
+display: inline;
+
+ }
+.sipo{
+color:white;
+font-family: "Barlow";
+font-size: 16px;
+font-weight: 700;
+margin: 0;
+padding: 0;
+
+display: inline;
+min-width: 110px
+}
+
+/* form kismi */
+.arkasari{
+  width: 100vw;
+  height: 600px;
+  background-color: #faf7f2;
+}
+.OformLong{
+display: flex;
+flex-direction: column;
+width: 450px;
+height: 600px;
+
+justify-content: baseline;
+text-align: start;
+margin: 0 auto;
+
+}
+.absolute{
+  display: flex;
+  font-family: "Barlow";
+  font-size: 22px;
+  font-weight: 600;
+  flex-direction: column;
+
+margin-top: 10px;
+
+}
+.price-number{
+  display:flex;
+  justify-content: space-between;
+  font-family: "Barlow";
+  font-size: 28px;
+  font-weight: 700;
+  
+  align-items: center;
+   width: 450px;
+}
+.sessiz{
+  display: flex;
+  font-family: "Barlow";
+  font-size: 16px;
+  font-weight: 400;
+  justify-content: space-between;
+  width: 150px;
+ 
+}
+.acikla{
+  font-family: "Barlow";
+  font-size: 16px;
+  font-weight: 400;
+}
+.boyut{
+display: flex;
+flex-direction: column;
+border: 1px solid rgb(10, 213, 138);
+}
+
+
  /* #root {
   max-width: 1280px;
   margin: 0 auto;
