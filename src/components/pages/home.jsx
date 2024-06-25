@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef  } from 'react'
+import React, { useEffect, useRef  } from 'react'
 
 import { useHistory } from 'react-router-dom'
 
@@ -90,22 +90,22 @@ function Homeb(props) {
   let history=useHistory()
 
 function buttonHandler(){
-console.log("buttonclicked!");
+console.log("Aciktim button is clicked!");
 history.push("/order");
 }
 
 function iconaTikla(category){
 
 
-  setSelectedCategory(category);
-  fetchSelectedItems(category);
-  scrollToIcons()
+  setSelectedCategory(category);  // Seçili kategoriyi ayarla
+  // fetchCategoryItems(category); // Seçili kategoriye göre öğeleri getir
+  scrollToIcons()  // İkonlara kaydır
   
 }
 function categorySec (category){
 
   setSelectedCategory(category);
-  fetchSelectedItems(category);
+  // fetchCategoryItems(category);
 }
 function scrollToIcons() {
   if (iconsRef.current) {
@@ -114,28 +114,31 @@ function scrollToIcons() {
 }
 useEffect(()=>{
   if(selectedCategory){
-    fetchSelectedItems(selectedCategory)
+    fetchCategoryItems(selectedCategory)
   }
 
 },[selectedCategory]);
-function fetchSelectedItems(category){
+
+function fetchCategoryItems(category){
   
-  const selectedItems = menulist.find(category => category.category === selectedCategory);
-  if (selectedItems) {
-    setCategoryItems(selectedItems.items);
+  const sCategory = menulist.find(cat => cat.category === selectedCategory);
+
+  if (sCategory) {
+    setCategoryItems(sCategory.items);
     console.log(`"${category}" kategorisi için menüler başarıyla yüklendi.`)
   } else {
     console.error(`İlgili kategori bulunamadı: ${category}`, selectedCategory);
   }
 }
-function clickedItems (event){
-  setSelectedItems(event.target.value);
+
+function clickedItems (value){
+  setSelectedItems(value);
   history.push("/order");
-  console.log("Paketlenen menulerden bir urune tiklandi")
+  console.log(`Paketlenen menulerden "${value}" tiklandi`)
 }
 useEffect(()=>{
   if(selectedItems){
-    clickedItems(event)
+    clickedItems(selectedItems)
     console.log("sayfaya tiklanan urun bilgileri geliyor(toppings,aciklama, yorumlar vs)")
   }
 },[selectedItems])
@@ -216,17 +219,17 @@ useEffect(()=>{
 
         <div className="ortu">
                 <div className="sunum">
-                {categoryItems.map((item, index) => (
-                    <div className="cardcik" onClick={clickedItems} key={item.id}>
+                {categoryItems.map((menu, index) => (
+                    <div className="cardcik" onClick={()=>clickedItems(menu)} key={menu.id} >
                         
-                        <img src={item.resim} alt={item.ad} />
+                        <img src={menu.resim} alt={menu.ad} />
                         <div className="kat" >
                       
-                          <h4>{item.ad}</h4>
+                          <h4>{menu.ad}</h4>
                           <div className="line">
-                                  <p>{item.rate}</p>
-                                  <p>({item.yorum})</p>
-                                  <h5>{item.price}₺</h5>
+                                  <p>{menu.rate}</p>
+                                  <p>({menu.yorum})</p>
+                                  <h5>{menu.price}₺</h5>
                           </div>
                         </div>
                     

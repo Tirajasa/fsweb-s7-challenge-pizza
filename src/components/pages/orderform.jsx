@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory } from 'react-router-dom';
 import { FormGroup, Input, Label } from 'reactstrap';
 import styled from 'styled-components'
 import MenuFis from '../parts/order/MenuFis';
@@ -30,20 +30,29 @@ color: #000000;
  `; 
  
 function OrderForm(props) {
-const {numberx,setNumberx,showed,setShowed,
+const {
+  numberx,setNumberx,showed,setShowed,
 setBuyukluk,extraTop,setExtraTop,menu,setMenu,fis,setFis,
 kalinlik,setKalinlik,buyukluk,selectedItems,setSelectedItems}=props;
 
   let history=useHistory();
  
-function checkMate (event) {
-  const { id, checked }=event.currentTarget;
-  
-    setToppings(prevtoppings=>prevtoppings.map(topping=>
-      topping.id=== parseInt(id)?{...topping,checked:checked }:topping)
-    );
+  function checkMate(event) {
+    const { id, checked } = event.currentTarget;
     
-}
+    setShowed(prevShowed => {
+      // Önce prevShowed'in bir kopyasını oluşturarak güvenli bir şekilde güncelleme yapalım
+      const updatedToppings = prevShowed.toppings.map(topping =>
+        topping.id === parseInt(id) ? { ...topping, checked: checked } : topping
+      );
+  
+      // Oluşturduğumuz güncellenmiş kopyayı setShowed içinde kullanalım
+      return {
+        ...prevShowed,
+        toppings: updatedToppings
+      };
+    });
+  }
 function increase(){
 
   setNumberx(number=>number+1);
@@ -57,20 +66,36 @@ function increase(){
 
 function SipVerildi (event){
   // const { id }=event.target;
-  console.log("Siparis detaylari:",{showed,toppings: toppings.filter(topping => topping.checked),
+  console.log("Siparis detaylari:",{showed,toppings: showed.toppings.filter(topping => topping.checked),
     numberx,
     buyukluk,
     kalinlik,});
   history.push("/success")
-  
-
- 
 
 }
 function icerikGelsin(selectedItems){
   setShowed(selectedItems);
 }
 
+// secilen item absolu pizza
+// showed butun detaylari order sayfasinda gosteriyor.+bunu yaparken form da yenilenmeli forma ekle.
+//toppings kismini duzeltmek icin fonksiyon yaz
+// büyüklük ,kalinlik  ekle menu js icine
+
+// function xyx(id){
+
+//   selectedItems.find(item=>item.id===parseInt(id))
+// }
+
+
+
+useEffect(()=>{
+  if(selectedItems){
+    icerikGelsin(selectedItems);
+  }
+
+
+},[selectedItems])
 
   return (
    
@@ -92,7 +117,6 @@ function icerikGelsin(selectedItems){
           <p>{showed.aciklama}</p>
         </div>
          )}
-        <p>Frontent Dev olarak hala position:absolute kullanıyorsan bu çok acı pizza tam sana göre. Pizza, domates, peynir ve genellikle çeşitli diğer malzemelerle kaplanmış, daha sonra geleneksel olarak odun ateşinde bir fırında yüksek sıcaklıkta pişirilen, genellikle yuvarlak, düzleştirilmiş mayalı buğday bazlı hamurdan oluşan İtalyan kökenli lezzetli bir yemektir. . Küçük bir pizzaya bazen pizzetta denir.</p>
       </div>
    
     <FormGroup>
@@ -101,7 +125,7 @@ function icerikGelsin(selectedItems){
             <FormGroup >
 
                 <Label>Küçük</Label>
-                <Input type="radio" name='boyut' value='küçük"' 
+                <Input type="radio" name='boyut' value='küçük' 
                 checked={buyukluk === "küçük"}
                 onChange={(e) => setBuyukluk(e.target.value)} />
 
@@ -117,9 +141,9 @@ function icerikGelsin(selectedItems){
               </FormGroup>
         </FormGroup>
 
-        <FormGroup onChange={kalinlik} className='kalin'>
+        <FormGroup  className='kalin'>
           <Label for="kalinlik">Hamur Kalinligi </Label>
-          <Input type='select' id="kalinlik" name='kalinlik' value={kalinlik}
+          <Input  type='select' id="kalinlik" name='kalinlik' value={kalinlik}
               onChange={(e) => setKalinlik(e.target.value)}>
                   <option value="EkstraInce">Ekstra ince</option>
                   <option value="Ince">Ince</option>
@@ -129,8 +153,7 @@ function icerikGelsin(selectedItems){
         </FormGroup>
 
         <h2>Ek Malzemeler </h2>
-        {
-        willSelectedToppings.map((topping)=>(
+        {showed && showed.toppings && showed.toppings.map((topping) => (
          <FormGroup check key={topping.id} className='malzeme'>
       
           <Label htmlFor={topping.id}>{topping.ad}</Label>
@@ -152,7 +175,7 @@ function icerikGelsin(selectedItems){
           <Num>{numberx}</Num>
           <CokBut onClick={increase}>+</CokBut>
         </FormGroup>
-       <MenuFis extraTop={extraTop} setExtraTop={setExtraTop} menu={menu} selectedItem={selectedItem} setSelectedItem={setSelectedItem} />
+       <MenuFis extraTop={extraTop} setExtraTop={setExtraTop} menu={menu} selectedItem={selectedItems} setSelectedItem={setSelectedItems} />
         
     </FormGroup>
         <SipBut onClick={SipVerildi}>Siparis Ver</SipBut>
