@@ -1,11 +1,10 @@
-
   import { Route, Switch } from 'react-router-dom'
   import './App.css'
   import Homeb from "../src/components/pages/home"
   import OrderForm from "../src/components/pages/orderform"
   import Success from "./components/pages/success"
   import menulist from './components/api/menu'
-  import { useEffect, useState } from 'react'
+  import {useState } from 'react'
   function App() {
     
 
@@ -17,14 +16,18 @@
     const [selectedItems,setSelectedItems]=useState(null);
     const [showed, setShowed] = useState(PosAbAciPiz);/* sectigin kategorye gore adi urun aciklama fiyat rating yorumsayisi  boyut veya buyukluk ve ek malzemeler*/ 
     const [extraTop,setExtraTop]=useState(0);
-    const [menu,setMenu]=useState(0);
-    const [fis,setFis]=useState({});
-    const [kalinlik,setKalinlik]=useState("normal");
+    const [menu,setMenu]=useState([]);
+    const [fis,setFis]=useState({});// 
+    const [kalinlik,setKalinlik]=useState("-Hamur Kalınlığı Seç-");
     const [buyukluk,setBuyukluk]=useState("orta");
-
     const [numberx,setNumberx]=useState(1);
-
-
+    // const [error,setError]=useState("");
+    const [toppings,setToppings]=([]);
+    const [eklenmisItems,setEklenmisItems]=useState([]);
+    const [menuSayisi, setMenuSayisi] = useState([
+      { ad: "", adet: 0 },
+     
+    ]);//resetlemeyi unutma
   
     return (
       <>
@@ -36,18 +39,21 @@
           </Route>
         <Route path="/order">
           <OrderForm 
-          
+          menuSayisi={menuSayisi} setMenuSayisi={menuSayisi}
+          eklenmisItems={eklenmisItems}
+          setEklenmisItems={setEklenmisItems}
           numberx={numberx} setNumberx={setNumberx} 
           showed={showed} setShowed={setShowed}
           setBuyukluk={setBuyukluk}  buyukluk={buyukluk}
           setExtraTop={setExtraTop} extraTop={extraTop} 
           menu={menu} setMenu={setMenu} 
-          fis={fis} setFish={setFis}
+          fis={fis} setFis={setFis}
           kalinlik={kalinlik} setKalinlik={setKalinlik}
-          selectedItems={selectedItems} setSelectedItems={setSelectedItems}  />
+          selectedItems={selectedItems} setSelectedItems={setSelectedItems} 
+          toppings={toppings} setToppings={setToppings} />
         </Route>
         <Route path="/success">
-          <Success fis={fis}/>
+          <Success menuSayisi={menuSayisi} fis={fis}/>
         </Route>
       </Switch>
           
@@ -56,3 +62,4 @@
   }
 
   export default App
+

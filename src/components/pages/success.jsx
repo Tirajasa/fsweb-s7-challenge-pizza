@@ -21,7 +21,9 @@ function Success(props) {
           <p>SİPARİŞİNİZ ALINDI!</p>
           </div>
           <div className="siparis-ekstre">
-          {fis}{/* {yanlis oluyo bunu duzeltmen lazim---------------} */}
+            {menuSayisi.ad}
+            {menuSayisi.adet}
+          {/* {yanlis oluyo bunu duzeltmen lazim---------------} */}
           <div className='sipozet'>
 
           </div>
