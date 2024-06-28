@@ -9,22 +9,27 @@ const Banner=styled.img`
 
 
 function Success(props) {
-  const {fis}=props;
+  const {fis,menuSayisi}=props;
   return (
     < >
       <div className='redflag'>
         <Banner src="../../../Assets/mile1-assets/logo.svg" ></Banner>
-        <div className='sipozet'>
-
-        </div>
-        <Card className='ekstresi'>
-          
-
-        </Card>
+       
         <div className='wrap'>
           <div className='onay'>
           <p>TEBRİKLER!</p>
           <p>SİPARİŞİNİZ ALINDI!</p>
+          </div>
+          <div className="siparis-ekstre">
+          {fis}{/* {yanlis oluyo bunu duzeltmen lazim---------------} */}
+          <div className='sipozet'>
+
+          </div>
+          <div className='ekstresi'>
+  
+
+         </div>
+          
           </div>
         </div>
       </div>

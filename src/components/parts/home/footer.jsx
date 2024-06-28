@@ -108,7 +108,7 @@ function FooterC() {
         </Footerx>
         <Footery>
             <p className='parti'>© 2023 Teknolojik Yemekler. </p>
-            <i class="fab fa-twitter biter" aria-hidden="true"></i>
+            <i className="fab fa-twitter biter" aria-hidden="true"></i>
         </Footery>
     </div>
   )

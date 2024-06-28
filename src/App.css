@@ -158,9 +158,7 @@ height: 500px;
     margin: 10px;
     position: relative;
     z-index: 0;
-    font-family: "Barlow";
-    font-weight: 600;
-    font-size: 28px;
+   
   }
   .altres img {
     width: 450px;
@@ -192,6 +190,11 @@ height: 500px;
     color:white;
     font-family: "Barlow";
     font-weight: 600;
+  }
+  .anti{
+    font-family: "Barlow";
+    font-weight: 600;
+    font-size: 28px;
   }
   .sipB {
     color: #ce2828;
@@ -259,7 +262,7 @@ cursor: pointer;
 }
 .bale p{
  
-  font-family: "barlow";
+  font-family: "Barlow";
   font-weight: 500;
   font-size: 16px;
   text-align: center;
@@ -323,18 +326,18 @@ cursor: pointer;
   font-family: "Barlow";
   font-weight: 600;
 }
-.line{
+.linex{
   display: flex;
   justify-content: space-between;
   
   width: 280px;
 }
-.line p{
+.linex p{
   font-family: "Barlow";
   font-weight: 600;
   font-size: 14px;
 }
-.line h5{
+.linex h5{
   font-family: "Barlow";
   font-weight: 700;
   font-size: 18px;
@@ -571,16 +574,17 @@ min-width: 110px
   width: 100vw;
   height: 600px;
   background-color: #faf7f2;
+  z-index: -1;
 }
 .OformLong{
 display: flex;
 flex-direction: column;
 width: 450px;
 height: 600px;
-
 justify-content: baseline;
 text-align: start;
 margin: 0 auto;
+border: 1px solid slateblue;
 
 }
 .absolute{
@@ -593,6 +597,7 @@ margin: 0 auto;
 margin-top: 10px;
 
 }
+
 .price-number{
   display:flex;
   justify-content: space-between;
@@ -610,18 +615,244 @@ margin-top: 10px;
   font-weight: 400;
   justify-content: space-between;
   width: 150px;
+  margin-right: 5px;
  
 }
 .acikla{
-  font-family: "Barlow";
+  font-family: "Barlow" ;
   font-size: 16px;
   font-weight: 400;
+}
+/* orta alan kismi */
+
+.ortaAlan{
+  width: 450px;
+  min-height: 600px;
+  border: 1px solid black;
+  margin: 0 auto;
+  
+  
+}
+.ikili{
+  display: flex;
+ text-align: center;
+  width: 450px;
+  
+  align-items: self-start;
+  height: 100px;
+  margin: 20px auto ;
+
 }
 .boyut{
 display: flex;
 flex-direction: column;
-border: 1px solid rgb(10, 213, 138);
+
+width: 225px;
+justify-content: baseline;
+text-align: start;
+margin: 0;
+align-items: baseline;
+
+
 }
+.boyut h3 {
+  font-family: "Barlow";
+  font-size: 20px;
+  font-weight: 600;
+}
+.boy{
+  display:flex;
+  justify-content: space-between;
+ text-align: center; 
+ width: 160px;
+ gap: 10px;
+ margin-top: 10px;
+}
+.kuccukx{
+  width: 50px;
+  background-color: #faf7f2;
+  height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+ 
+}
+
+
+.kuccuk{
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  /* display: none !important; */
+ 
+ }
+.kuccukx::before{
+  transform: scale(0.9);
+}
+
+
+.kuccukx:hover {
+  background-color: aquamarine;
+  border:3px solid rgb(23, 107, 79) ;
+  border-radius: 50%;
+  }
+.kuccuk:checked + .kuccukx{
+  transform: scale(1.1);
+  background-color: #ffeecc !important;
+  
+  }
+  
+
+
+
+
+/* drowndown kismi */
+
+
+
+.kalin{
+  font-family: "Barlow";
+  font-size: 20px;
+  font-weight: 600;
+ display: flex;
+ flex-direction: column;
+ align-items: baseline;
+ width: 225px;
+ text-align:start;
+
+}
+.dropdown{
+  width: 220px !important;
+  background-color: #faf7f2 !important;
+  font-family: "Barlow";
+  font-size: 14px;
+  font-weight: 500;
+  margin-top: 10px;
+ 
+}
+
+
+/* toppings kismi */
+
+.ikmal{
+display: flex;
+flex-direction: column;
+align-items: baseline;
+
+}
+.ikmal h2{
+  font-family: "Barlow";
+  font-size: 20px;
+  font-weight: 600;
+}
+
+
+.malzeme{
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  gap: 10px;
+  border: 10px solid rgb(209, 207, 144);
+  align-items: start;
+  
+}
+
+.malin{
+  margin: 10px; 
+  width: 30px !important;
+  height: 30px !important;
+  background: transparent!important;
+  
+  
+}
+
+ .malin:checked{
+  margin: 10px; 
+  width: 30px !important;
+  height: 30px !important;
+  background: #fdc912!important;
+  color: #000;
+ 
+} 
+
+/*   
+.tehlike{
+  background-color: #c90505;
+}
+.checkmark{
+  font-size: 16px;
+  font-weight: 700;
+  font-family: "Barlow";
+  background: #fdc912;
+  width: 30px;
+  height: 30px;
+  margin: 10px;
+  border-radius: 2px;
+  position: relative;
+  
+}
+.yellowtik{
+  opacity: 0;
+} */
+
+
+/* 
+siparis notu kismi */
+.altKisim{
+  width: 450px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+.yanYana{
+height:400px;
+width:450px; 
+border: 1px solid black;
+display: flex;
+
+}
+.sipNot{
+  font-family: "Barlow" !important;
+  font-size: 600;
+  font-size: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  
+  width: 450px ;
+  border: 1px solid black;
+  height: 120px;
+  align-items: baseline;
+  text-align: start;
+  margin:10px 0;
+  
+}
+.siparisNotu{
+  font-family: "Barlow" !important;
+  font-size: 600 !important;
+  font-size: 20px;
+  border: 1px solid black;
+  height: 100px;
+
+}
+.artiEksi{
+  height:40px;
+width: 150px;
+
+}
+.notin{
+background-color: #faf7f2 !important;
+width: 450px !important;
+}
+
+
+
 
 
  /* #root {
