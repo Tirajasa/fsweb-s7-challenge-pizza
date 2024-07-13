@@ -137,7 +137,7 @@ function Homeb(props) {
     if (selectedItems) {
       clickedItems(selectedItems);
       console.log(
-        "sayfaya tiklanan urun bilgileri geliyor(toppings,aciklama, yorumlar vs)"
+        "order sayfasina tiklanan urun bilgileri gidiyor(toppings,aciklama, yorumlar vs)"
       );
     }
   }, [selectedItems]);

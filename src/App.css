@@ -692,6 +692,9 @@ align-items: baseline;
   /* display: none !important; */
  
  }
+ .kuccuk:checked{
+  background-color: aquamarine !important;
+ }
 .kuccukx::before{
   transform: scale(0.9);
 }
@@ -702,17 +705,17 @@ align-items: baseline;
   border:3px solid rgb(23, 107, 79) ;
   border-radius: 50%;
   }
-.kuccuk:checked + .kuccukx{
+/* .kuccuk:checked + .kuccukx{
   transform: scale(1.1);
   background-color: #ffeecc !important;
   
-  }
+  } */
   
 
 
 
 
-/* drowndown kismi */
+/* dropdown kismi */
 
 
 

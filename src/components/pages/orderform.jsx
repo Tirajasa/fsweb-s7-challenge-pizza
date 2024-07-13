@@ -29,6 +29,8 @@ const CokBut = styled.button`
 
 function OrderForm(props) {
   const {
+    errors,
+    setErrors,
     numberx,
     setNumberx,
     showed,
@@ -52,6 +54,16 @@ function OrderForm(props) {
     menuSayisi,
     setMenuSayisi,
   } = props;
+
+  const errorlar={
+    userName:"Gecerli bir isim giriniz",
+    //direk order sayfasini acinca bir urun secmelisiniz erroru yazabiliriz veya hizli satin al butonu insa edebiliriz
+    buyukluk:"Urunun boyutunu secmeyi unuttunuz",
+    kalinlik:"Urunun inceligini secmelisiniz",
+    toppings:"10 adetten fazla ek malzeme secemezsiniz.",
+    adet:"Ayni urun icin 10 adetten fazla pizza siparis veremezsiniz."
+    
+      }
 
   let history = useHistory();
 
@@ -124,60 +136,40 @@ function OrderForm(props) {
   }
 
   function SipVerildi(event) {
+    if(!buyukluk){
+      setErrors({...errors,buyukluk:errorlar.buyukluk})
+
+    }else{
+      setErrors({...errors})}
     // const { id }=event.target;
   
     console.log("Siparis detaylari:", {
-      showed,
-      Toppings: showed.toppings.filter((topping) => topping.checked),
-      numberx,
+      ad:selectedItems.ad,
+      Topping: showed.toppings.filter((topping) => topping.checked),
+      adet:numberx,
       buyukluk,
       kalinlik,
     });
     history.push("/success");
     setFis({
       ...fis,
-      selectedItems,
-      menuSayisi,
-      extraTop,
-      menu,
-      buyukluk: showed.size.filter((boy) => boy.checked),
-      kalinlik: showed.thickness.filter((kalinlik) => kalinlik.checked),
-      toppings: showed.toppings.map((topping) => topping.checked),
+       adi:selectedItems.ad,
+      adet:menuSayisi.adet,
+      toppings:extraTop,
+      menu:0,
+      buyukluk: buyukluk.find((boy) => boy.checked),
+      kalinlik: kalinlik.find((kalinlik) => kalinlik.checked),
+      toppings: showed.toppings.map((topping) => topping.checked===true),
     });
+    console.log("fis:",fis)
     // hatirlatma :fisi appjsx de ve sipverildinin icinde degistirdim. datanin nasil olmasi gerektigine karar ver!!!--------
   }
   function icerikGelsin(selectedItems) {
     setShowed(selectedItems);
+
   }
   // ✔
-  // secilen item absolu pizza
-  // showed butun detaylari order sayfasinda gosteriyor.+bunu yaparken form da yenilenmeli forma ekle.
-  //toppings kismini duzeltmek icin fonksiyon yaz
-  // büyüklük ,kalinlik  ekle menu js icine
-
-  // function xyx(id){
-
-  //   selectedItems.find(item=>item.id===parseInt(id))
-  // }
-  // useEffect(()=>{
-  //  function tikgelsin(){
-  // tiklananTopping=showed.toppings.filter(topping => topping.checked);
-
-  //   const ToppingCheck=document.querySelector(".checkmark");
-  //  if(ToppingCheck){
-  //     if(tiklananTopping.length>10){
-  //       ToppingCheck.classList.add("tehlike");
-
-  //  } else {
-  //   ToppingCheck.classList.remove("tehlike");
-  //         }
-  //         ToppingCheck.classList.toggle("yellowtik");
-  //   }
-  //   return ToppingCheck;
-  // }
-  // ToppingCheck.addEventListener("click",tikgelsin)
-  // setIsChecked(tiklananTopping=>tiklananTopping?true:false);
-  // },[isChecked])
+  
 
   useEffect(() => {
     if (selectedItems) {
@@ -227,6 +219,8 @@ function OrderForm(props) {
         <div className="ortaAlan">
           <div className="ikili">
             <div className="boyut">
+           { errors.buyukluk&&
+              <p className="red">*{errors.buyukluk}*</p>}
               <h3>Boyut Seç </h3>
               <div className="boy">
                 <FormGroup>
@@ -276,6 +270,7 @@ function OrderForm(props) {
                     <div className="kuc"></div>
                   </Label>
                 </FormGroup>
+                
               </div>
             </div>
             <div className="kalin">
