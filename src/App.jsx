@@ -10,23 +10,21 @@
 
     const pizzaci=menulist.find(category=>category.category==="Pizzalar");
     const PosAbAciPiz=pizzaci.items.find(item=>item.ad==="Position Absolute Acı Pizza");
-
+    const initialForm={
+      userName:"",
+      buyukluk:"",
+      kalinlik:"-Hamur Kalınlığı Seç-",
+      toppings:[],
+      adet:"",
+      not:""
+    }
     const [selectedCategory,setSelectedCategory]=useState(pizzaci.category);
     const [categoryItems, setCategoryItems] = useState(pizzaci.items);
     const [selectedItems,setSelectedItems]=useState(PosAbAciPiz);
     const [showed, setShowed] = useState(PosAbAciPiz);/* sectigin kategorye gore adi urun aciklama fiyat rating yorumsayisi  boyut veya buyukluk ve ek malzemeler*/ 
-    const [extraTop,setExtraTop]=useState(0);
-    const [menu,setMenu]=useState([]);
-    const [fis,setFis]=useState({});// 
-    const [kalinlik,setKalinlik]=useState("-Hamur Kalınlığı Seç-");
-    const [buyukluk,setBuyukluk]=useState("");
     const [numberx,setNumberx]=useState(1);
-    // const [error,setError]=useState("");
-    const [toppings,setToppings]=([]);
-    const [eklenmisItems,setEklenmisItems]=useState([]);
-    const [menuSayisi, setMenuSayisi] = useState([]);//resetlemeyi unutma
     const [errors,setErrors]=useState({})
- 
+    const [form,setForm] =useState(initialForm);
     return (
       <>
       <Switch>
@@ -37,21 +35,14 @@
           </Route>
         <Route path="/order">
           <OrderForm 
-          menuSayisi={menuSayisi} setMenuSayisi={menuSayisi}
-          eklenmisItems={eklenmisItems}
-          setEklenmisItems={setEklenmisItems}
+          form={form} setForm={setForm}
           numberx={numberx} setNumberx={setNumberx} 
           showed={showed} setShowed={setShowed}
-          setBuyukluk={setBuyukluk}  buyukluk={buyukluk}
-          setExtraTop={setExtraTop} extraTop={extraTop} 
-          menu={menu} setMenu={setMenu} 
-          fis={fis} setFis={setFis}
-          kalinlik={kalinlik} setKalinlik={setKalinlik}
           selectedItems={selectedItems} setSelectedItems={setSelectedItems} 
-          toppings={toppings} setToppings={setToppings} errors={errors} setErrors={setErrors}/>
+          errors={errors} setErrors={setErrors}/>
         </Route>
         <Route path="/success">
-          <Success menuSayisi={menuSayisi} fis={fis}/>
+          <Success form={form}/>
         </Route>
       </Switch>
           

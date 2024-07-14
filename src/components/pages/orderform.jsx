@@ -35,66 +35,36 @@ function OrderForm(props) {
     setNumberx,
     showed,
     setShowed,
-    setBuyukluk,
-    extraTop,
-    setExtraTop,
-    menu,
-    setMenu,
-    fis,
-    setFis,
-    kalinlik,
-    setKalinlik,
-    buyukluk,
     selectedItems,
     setSelectedItems,
-    toppings,
-    setToppings,
-    eklenmisItems,
-    setEklenmisItems,
-    menuSayisi,
-    setMenuSayisi,
+   form,setForm
   } = props;
 
+
   const errorlar={
-    userName:"Gecerli bir isim giriniz",
+    userName:"Gecerli bir isim giriniz, en az 3 harf icermelidir.",
     //direk order sayfasini acinca bir urun secmelisiniz erroru yazabiliriz veya hizli satin al butonu insa edebiliriz
     buyukluk:"Urunun boyutunu secmeyi unuttunuz",
     kalinlik:"Urunun inceligini secmelisiniz",
-    toppings:"10 adetten fazla ek malzeme secemezsiniz.",
-    adet:"Ayni urun icin 10 adetten fazla pizza siparis veremezsiniz."
-    
+    toppings:["en az 4 ek malzeme seciniz.","10 adetten fazla ek malzeme secemezsiniz.",],
+    adet:"Ayni urun icin 10 adetten fazla pizza siparis veremezsiniz.",
+    not:"Siparis notunuz "
       }
 
   let history = useHistory();
 
-  function checkMate(event) {
-    const { id, checked } = event.currentTarget;
-
-    setShowed(prevShowed => {
-  
-      const updatedToppings = prevShowed.toppings.map(topping =>
-        topping.id === parseInt(id) ? { ...topping, checked: checked } : topping
-      );
-      return {...prevShowed, toppings: updatedToppings};
-    });
-    // tikgelsin();
-  }
-
-  function ToppingIsimleriniKaydet(event) {
-    const { id, checked } = event.target;
-    setToppings((prevToppings) =>
-      prevToppings.map((topping) =>
-        topping.id === parseInt(id) ? { ...topping, checked: checked } : topping
+  function checkMate(e) {
+    const { id, checked } = e.currentTarget;
+    
+    setForm(prevForm => ({
+      ...prevForm,
+      toppings: prevForm.toppings.map(topping =>
+        topping.id === parseInt(id)
+          ? { ...topping, checked:checked }
+          : topping
       )
-    );
+    }));
   }
-
-  //   function cilginToppingler(event){
-  //     checkMate(event);
-  //   ToppingIsimleriniKaydet(event);
-
-  // }
-  //bir tane urun(absolute pizza) secilince  fiyat hesapliyor)
   function eklenmismenuleribelirle(id) {
     setEklenmisItems((prevEklenmis) => [...prevEklenmis, id]);
   }
@@ -130,13 +100,13 @@ function OrderForm(props) {
   }
   function reset(event) {
     if (event.target.id === "resetButton"){
-      setMenuSayisi(numberx);
+      
       setNumberx(1);
     } 
   }
 
   function SipVerildi(event) {
-    if(!buyukluk){
+    if(!form.buyukluk){
       setErrors({...errors,buyukluk:errorlar.buyukluk})
 
     }else{
@@ -145,23 +115,23 @@ function OrderForm(props) {
   
     console.log("Siparis detaylari:", {
       ad:selectedItems.ad,
-      Topping: showed.toppings.filter((topping) => topping.checked),
+      Toppings: showed.toppings.filter((topping) => topping.checked),
       adet:numberx,
-      buyukluk,
-      kalinlik,
+      buyukluk:form.buyukluk,
+      kalinlik:form.kalinlik,
     });
     history.push("/success");
-    setFis({
-      ...fis,
+    setForm({
+      ...form,
        adi:selectedItems.ad,
-      adet:menuSayisi.adet,
-      toppings:extraTop,
+      adet:form.adet,
+      toppings:form.toppings,
       menu:0,
-      buyukluk: buyukluk.find((boy) => boy.checked),
-      kalinlik: kalinlik.find((kalinlik) => kalinlik.checked),
+      buyukluk: form.buyukluk.find((boy) => boy.checked),
+      kalinlik: form.kalinlik.find((kalinlik) => kalinlik.checked),
       toppings: showed.toppings.map((topping) => topping.checked===true),
     });
-    console.log("fis:",fis)
+    console.log("fis:",form)
     // hatirlatma :fisi appjsx de ve sipverildinin icinde degistirdim. datanin nasil olmasi gerektigine karar ver!!!--------
   }
   function icerikGelsin(selectedItems) {
@@ -231,8 +201,8 @@ function OrderForm(props) {
                       type="radio"
                       name="boyut"
                       value="küçük"
-                      checked={buyukluk === "küçük"}
-                      onChange={(e) => setBuyukluk(e.target.value)}
+                      checked={form.buyukluk === "küçük"}
+                      onChange={(e) => setForm({...form,buyukluk:e.target.value})}
                       className="kuccuk"
                     />
                     <div className="kuc"></div>
@@ -247,8 +217,8 @@ function OrderForm(props) {
                       type="radio"
                       name="boyut"
                       value="orta"
-                      checked={buyukluk === "orta"}
-                      onChange={(e) => setBuyukluk(e.target.value)}
+                      checked={form.buyukluk === "orta"}
+                      onChange={(e) => setForm({...form,buyukluk:e.target.value})}
                       className="kuccuk"
                     />
                     <div className="kuc"></div>
@@ -262,8 +232,8 @@ function OrderForm(props) {
                       type="radio"
                       name="boyut"
                       value="büyük"
-                      checked={buyukluk === "büyük"}
-                      onChange={(e) => setBuyukluk(e.target.value)}
+                      checked={form.buyukluk === "büyük"}
+                      onChange={(e) => setForm({...form,buyukluk:e.target.value})}
                       className="kuccuk"
                       id="büyük "
                     />
@@ -282,8 +252,8 @@ function OrderForm(props) {
                     type="select"
                     id="kalinlik"
                     name="kalinlik"
-                    value={kalinlik}
-                    onChange={(e) => setKalinlik(e.target.value)}
+                    value={form.kalinlik}
+                    onChange={(e) => setForm({...form,kalinlik:e.target.value})}
                   >
                     <option value="Seçim">-Hamur Kalınlığı Seç-</option>
                     <option value="EkstraInce">Ekstra ince</option>
@@ -309,7 +279,7 @@ function OrderForm(props) {
                         type="checkbox"
                         id={topping.id}
                         checked={topping.checked || false}
-                        onChange={checkMate}
+                        onChange={()=>checkMate(e)}
                         value={topping.id}
                         className="malin"
                       />
@@ -348,13 +318,6 @@ function OrderForm(props) {
               </div>
               <div className="whole">
                 <MenuFis
-                  extraTop={extraTop}
-                  setExtraTop={setExtraTop}
-                  eklenmisItems={eklenmisItems}
-                  menu={menu}
-                  topping={toppings}
-                  fis={fis}
-                  menuSayisi={menuSayisi}
                   selectedItem={selectedItems}
                   setSelectedItem={setSelectedItems}
                 />
