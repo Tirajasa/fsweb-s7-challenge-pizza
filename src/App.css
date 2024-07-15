@@ -812,14 +812,10 @@ siparis notu kismi */
   display: flex;
   flex-direction: column;
   background-color: white;
+  row-gap: 20px;
+ 
 }
-.yanYana{
-height:400px;
-width:450px; 
-border: 1px solid black;
-display: flex;
 
-}
 .sipNot{
   font-family: "Barlow" !important;
   font-size: 600;
@@ -827,32 +823,52 @@ display: flex;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  
+
   width: 450px ;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   height: 120px;
-  align-items: baseline;
   text-align: start;
   margin:10px 0;
+  
+
+  
+}
+.userIn{
+  height: 80px;
+  width: 450px;
+  /* border: 1px solid black; */
   
 }
 .siparisNotu{
   font-family: "Barlow" !important;
   font-size: 600 !important;
   font-size: 20px;
-  border: 1px solid black;
+  
   height: 100px;
 
 }
+.notin{
+  background-color: #faf7f2 !important;
+  width: 450px !important;
+  }
+
+.yanYana{
+    margin-top: 80px;
+    height:400px;
+    width:450px; 
+    border: 3px solid rgb(209, 47, 47);
+    display: flex;
+    
+    
+ }
 .artiEksi{
-  height:40px;
-width: 150px;
+height:60px;
+width: 170px;
+border: 3px solid rgb(209, 47, 47);
+margin: 10px;
 
 }
-.notin{
-background-color: #faf7f2 !important;
-width: 450px !important;
-}
+
 
 
 

@@ -11,7 +11,7 @@
     const pizzaci=menulist.find(category=>category.category==="Pizzalar");
     const PosAbAciPiz=pizzaci.items.find(item=>item.ad==="Position Absolute Acı Pizza");
     const initialForm={
-    
+      ad:"",
       userName:"",
       buyukluk:"",
       kalinlik:"-Hamur Kalınlığı Seç-",

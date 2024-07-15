@@ -93,6 +93,16 @@ function handleClear(){
     }else{
       setErrors({...errors})}
     const { value }=event.target;
+    setForm({
+      ...form,
+      username:form.username,
+      ad:selectedItems.ad,
+      adet:form.adet,
+      buyukluk: form.buyukluk,
+      kalinlik: form.kalinlik,
+      toppings: form.toppings,
+      not:form.not,
+    }) ;
   
     console.log("Siparis detaylari:", {
       username:form.username,
@@ -104,15 +114,7 @@ function handleClear(){
       not:form.not,
     });
     history.push("/success");
-    setForm({
-      ...form,
-      username:form.username,
-      adet:form.adet,
-      buyukluk: form.buyukluk,
-      kalinlik: form.kalinlik,
-      toppings: form.toppings,
-      not:form.not,
-    });
+ 
   
     console.log("fis:",form);
    
@@ -122,7 +124,7 @@ function handleClear(){
   }
   function icerikGelsin(selectedItems) {
     setShowed(selectedItems);
-
+    setForm({...form,ad:selectedItems.ad})
   }
   // ✔
   
@@ -270,7 +272,7 @@ function handleClear(){
                         checked={form.toppings?.includes(topping.ad)}
                         onChange={checkMate}
                         className="malin"
-                        value={topping.id}
+                        value={topping.ad}
                       />
               
                      <span className="checkmark"></span>
@@ -294,10 +296,30 @@ function handleClear(){
                     type="text"
                     name="not"
                     placeholder="Siparişine eklemek istediğin bir not var mı?"
+                    onChange={(e)=>{setForm({...form,not:e.target.value})}}
                   />
                 </Label>
+               
               </FormGroup>
-            </div>
+              <FormGroup>
+              <div className="userIn">
+                <Label className="userName" htmlFor="user">
+                  UserName
+                  <Input
+                    className="userin"
+                    id="username"
+                    type="text"
+                    name="username"
+                    placeholder="Username giriniz"
+                    onChange={(e)=>{setForm({...form,userName:e.target.value})}}
+                  />
+                </Label>
+               
+                </div>
+                </FormGroup>
+              </div>
+            
+            
             <div className="yanYana">
               <div className="artiEksi">
                 <FormGroup>
