@@ -140,6 +140,7 @@ function handleClear(){
 
   return (
     <>
+     <form>
       <div className="arkasari">
         <div className="OredBan">
   
@@ -155,7 +156,7 @@ function handleClear(){
             alt="yarim pizza"
           />
         </div>
-       
+      
         <div className="OformLong">
           {showed && (
             <div className="absolute">
@@ -331,17 +332,21 @@ function handleClear(){
                   Ekle
                 </Button>
               </div>
+              
               <div className="whole">
                 <MenuFis
                   selectedItem={selectedItems}
                   setSelectedItem={setSelectedItems}
                 />
-                <SipBut onClick={sipVerildi}>Siparis Ver</SipBut>
+                <SipBut type="submit" onSubmit={sipVerildi}>Siparis Ver</SipBut>
               </div>
             </div>
           </div>
         </div>
       </div>
+      
+     
+      </form>
       <FooterC />
     </>
   );
