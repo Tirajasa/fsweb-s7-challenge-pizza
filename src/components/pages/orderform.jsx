@@ -28,7 +28,7 @@ const CokBut = styled.button`
 `;
 
 function OrderForm(props) {
-  const {
+  const {initialForm,
     errors,
     setErrors,
     numberx,
@@ -50,46 +50,21 @@ function OrderForm(props) {
     adet:"Ayni urun icin 10 adetten fazla pizza siparis veremezsiniz.",
     not:"Siparis notunuz "
       }
+function checkMate(event){
+  const {name}=event.target;
 
+    if(form.toppings.includes(name)){
+      const isaretlenenler=form.toppings.filter(topping=>topping!=name)
+      setForm({...form,toppings:isaretlenenler})
+      
+    }else{
+      const newForm=[...form.toppings,name]
+      setForm({...form,toppings:newForm})
+    
+  }
+}
   let history = useHistory();
 
-  function checkMate(e) {
-    const { id, checked } = e.currentTarget;
-    
-    setForm(prevForm => ({
-      ...prevForm,
-      toppings: prevForm.toppings.map(topping =>
-        topping.id === parseInt(id)
-          ? { ...topping, checked:checked }
-          : topping
-      )
-    }));
-  }
-  function eklenmismenuleribelirle(id) {
-    setEklenmisItems((prevEklenmis) => [...prevEklenmis, id]);
-  }
-
-  function hesaplaMenu(event,id){
-   
-    eklenmismenuleribelirle(id);
-  const total=menu.reduce((toplam,item)=>{
-    const toplamtop=item.toppings.reduce((aratoplam,topping)=>{
-      return topping.checked? aratoplam+topping.fiyat :aratoplam
-    },0);
-
-    setExtraTop(toplamtop);
-    return toplam+ (item.price+ toplamtop)
-  },0);
-
-  setMenu(total);
-  reset(event);
-  return total;
-
-  }
-
-  // function buyuklukSec(event){
-  //   setBuyukluk(event.target.value);
-  // }
   function increase() {
     setNumberx((number) => number + 1);
   }
@@ -98,40 +73,51 @@ function OrderForm(props) {
       setNumberx((number) => number - 1);
     }
   }
-  function reset(event) {
-    if (event.target.id === "resetButton"){
-      
-      setNumberx(1);
-    } 
+  function ekleReset(event) {
+    const {id}=event.target;
+    if (id === "resetButton"){
+     {/*--------------------yarim kaldi*/}
+    }
+    handleClear();
+    setNumberx(1);
   }
+function handleClear(){
 
-  function SipVerildi(event) {
+  setForm(initialForm);
+}
+  function sipVerildi(event) {
+    event.preventDefault();
     if(!form.buyukluk){
       setErrors({...errors,buyukluk:errorlar.buyukluk})
 
     }else{
       setErrors({...errors})}
-    // const { id }=event.target;
+    const { value }=event.target;
   
     console.log("Siparis detaylari:", {
+      username:form.username,
       ad:selectedItems.ad,
-      Toppings: showed.toppings.filter((topping) => topping.checked),
+      toppings: form.toppings,
       adet:numberx,
       buyukluk:form.buyukluk,
       kalinlik:form.kalinlik,
+      not:form.not,
     });
     history.push("/success");
     setForm({
       ...form,
-       adi:selectedItems.ad,
+      username:form.username,
       adet:form.adet,
-      toppings:form.toppings,
-      menu:0,
-      buyukluk: form.buyukluk.find((boy) => boy.checked),
-      kalinlik: form.kalinlik.find((kalinlik) => kalinlik.checked),
-      toppings: showed.toppings.map((topping) => topping.checked===true),
+      buyukluk: form.buyukluk,
+      kalinlik: form.kalinlik,
+      toppings: form.toppings,
+      not:form.not,
     });
-    console.log("fis:",form)
+  
+    console.log("fis:",form);
+   
+  
+    // handleClear();
     // hatirlatma :fisi appjsx de ve sipverildinin icinde degistirdim. datanin nasil olmasi gerektigine karar ver!!!--------
   }
   function icerikGelsin(selectedItems) {
@@ -167,6 +153,7 @@ function OrderForm(props) {
             alt="yarim pizza"
           />
         </div>
+       
         <div className="OformLong">
           {showed && (
             <div className="absolute">
@@ -268,28 +255,34 @@ function OrderForm(props) {
           <div className="ikmal">
             <h2>Ek Malzemeler </h2>
             <p>En Fazla 10 malzeme seçebilirsiniz. </p>
-            <div className="malzeme container ">
+            <div className="malzeme">
+              <FormGroup check>
               {showed &&
                 showed.toppings &&
                 showed.toppings.map((topping) => (
-                  <FormGroup check key={topping.id}>
-                    <Label htmlFor={topping.id}>
+                  <div className="Ekin" key={topping.id}>
+                    <Label className="container" htmlFor={topping.id}>
                       {topping.ad}: {topping.fiyat}₺
                       <Input
                         type="checkbox"
                         id={topping.id}
-                        checked={topping.checked || false}
-                        onChange={()=>checkMate(e)}
-                        value={topping.id}
+                        name={topping.ad}
+                        checked={form.toppings?.includes(topping.ad)}
+                        onChange={checkMate}
                         className="malin"
+                        value={topping.id}
                       />
-                      {/* <div className="checkmark">✔</div> */}
+              
+                     <span className="checkmark"></span>
                       {/* tekrar bi bak------------------------ */}
                     </Label>
+                  </div>
+                   ))}
                   </FormGroup>
-                ))}
+                  
             </div>
           </div>
+          
           <div className="altKisim">
             <div className="sipNot">
               <FormGroup>
@@ -312,7 +305,7 @@ function OrderForm(props) {
                   <Num>{numberx}</Num>
                   <CokBut onClick={increase}>+</CokBut>
                 </FormGroup>
-                <Button id="resetButton" onClick={(e) => hesaplaMenu(e, selectedItems.id)}className="white">
+                <Button id="resetButton" onClick={ekleReset}className="white">
                   Ekle
                 </Button>
               </div>
@@ -321,7 +314,7 @@ function OrderForm(props) {
                   selectedItem={selectedItems}
                   setSelectedItem={setSelectedItems}
                 />
-                <SipBut onClick={SipVerildi}>Siparis Ver</SipBut>
+                <SipBut onClick={sipVerildi}>Siparis Ver</SipBut>
               </div>
             </div>
           </div>

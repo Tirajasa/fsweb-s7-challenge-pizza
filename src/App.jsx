@@ -11,6 +11,7 @@
     const pizzaci=menulist.find(category=>category.category==="Pizzalar");
     const PosAbAciPiz=pizzaci.items.find(item=>item.ad==="Position Absolute Acı Pizza");
     const initialForm={
+    
       userName:"",
       buyukluk:"",
       kalinlik:"-Hamur Kalınlığı Seç-",
@@ -34,7 +35,7 @@
           selectedItems={selectedItems} setSelectedItems={setSelectedItems} />
           </Route>
         <Route path="/order">
-          <OrderForm 
+          <OrderForm initialForm={initialForm}
           form={form} setForm={setForm}
           numberx={numberx} setNumberx={setNumberx} 
           showed={showed} setShowed={setShowed}
