@@ -19,7 +19,8 @@ body{
  .redflag{
   background-color: rgb(206,40,40);
   width: 100vw;
-  height: 100vh;
+  height: 20vh;
+ 
  }
  .redflag p {
   font-size: 50px;
@@ -871,9 +872,61 @@ margin: 10px;
 
 
 
+.inline{
+  display: inline !important;
+}
+
+.wrap{
+background-color: #cd2828;
+align-items: center;
+height: 20vh;
+display: flex;
+flex-direction: column;
+}
+.onay{
+  display: flex;
+  flex-direction: column;
+  row-gap: 50px;
+  font-family: "Barlow";
+  font-size:26px ;
+  font-weight: 400;
+  width: 100vw;
+  
+
+}
+.siparis-ekstre{
+  background-color: #cd2828;
+  height: 15vh;
+}
+.sipozet{
+  background-color: #cd2828;
+color: white;
 
 
+}
+.cerceve{
+  border: 1px solid rgb(255, 255, 255);
+  width: 450px;
+  margin: 0 auto;
+  height: 50vh;
 
+
+}
+.ekstresi{
+  background-color: transparent;
+  text-align: center;
+  height: 60vh;
+ 
+align-items: center;
+
+width:400px;
+
+
+}
+.boslluk{
+  background-color: #cd2828;
+  height: 10vh;
+}
  /* #root {
   max-width: 1280px;
   margin: 0 auto;

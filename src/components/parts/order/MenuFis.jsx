@@ -12,7 +12,7 @@ font-weight: 600;
 font-family: 'Barlow';
 `;
 
-function MenuFis() {
+function MenuFis({fis,form}) {
   
 // const {}}=props;{/*menunun icinden price i cek bu yanlis oluyo asagida!!!!*/}
 // {cevap:menu tek bir sayiydi sen nasil price i cekiyorsun icinden ya!!}{artik degistirdim arraye alabilirsin, bunu bir dusun}
@@ -20,25 +20,27 @@ function MenuFis() {
 
 
   return (
-    <div>
+   
+    <div className='ekstresi' >
        
 {/* hatirlatma :her secilen menu icin maple donmeyi unutma -----------------*/}
    
-        <Card >
+        
           <SipTop>Sipariş Toplamı</SipTop>
           <div>
           {/* {.map((menu, index) => ( */}
            {/* <div key={index}> <h3>{menu.ad}({menu.adet})</h3></div> */}
           {/* ))} */}
             <h5>{}</h5>
-            <h5>Ek Malzeme:{/*toppings*/}</h5>
+            <h5>Ek Malzeme:</h5><p>{form.toppings.join(', ')}</p>
+          
           </div>
-          <div><p>Seçimler:</p> <p>{/*extraTop*/}</p> </div>
-          <div><p>Menu Toplami:</p> <p></p>{/*menu*/} </div>
+          <div><p>Seçimler:</p> <p>{form.ad}</p> </div>
+          <div><p>Menu Toplami:</p> <p>{fis.menu}</p> </div>
        
-          <div><p>Toplam:</p> <p></p>{/*totalPrice*/} </div>
+          <div><p>Toplam:</p> <p>{(fis.menu+fis.extras)*form.adet}</p> </div>
 
-        </Card>
+      
       
     
 

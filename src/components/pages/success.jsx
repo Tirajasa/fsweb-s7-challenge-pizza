@@ -1,6 +1,6 @@
 import React from "react";
-import { Card } from "reactstrap";
 import styled from "styled-components";
+import MenuFis from "../parts/order/MenuFis";
 const Banner = styled.img`
   position: relative;
   align-items: center;
@@ -8,23 +8,27 @@ const Banner = styled.img`
 `;
 
 function Success(props) {
-  const { form } = props;
+  const { form, fis } = props;
   return (
     <>
       <div className="redflag">
         <Banner src="../../../Assets/mile1-assets/logo.svg"></Banner>
-
+        </div>
         <div className="wrap">
           <div className="onay">
             <p>TEBRİKLER!</p>
             <p>SİPARİŞİNİZ ALINDI!</p>
           </div>
           <div className="siparis-ekstre">
-            <div className="sipozet"></div>
-            <div className="ekstresi"></div>
           </div>
         </div>
+        <div className="sipozet"> 
+          <div className="cerceve">
+      <MenuFis fis={fis} form={form}/>
       </div>
+      <div className="boslluk"></div>
+      </div>
+    
     </>
   );
 }
