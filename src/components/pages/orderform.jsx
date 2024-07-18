@@ -20,11 +20,15 @@ const AzBut = styled.button`
   background-color: rgb(253, 201, 18);
   color: black;
   border-radius: 6px 0 0 6px;
+ 
+
 `;
 const CokBut = styled.button`
   background-color: rgb(253, 201, 18);
   color: black;
   border-radius: 0 6px 6px 0;
+ 
+  
 `;
 
 function OrderForm(props) {
@@ -68,13 +72,13 @@ function checkMate(event){
   function increase(event) {
     event.preventDefault();
     setNumberx((number) => number + 1);
-    setForm({...form,adet:numberx})
+    setForm({...form,adet:numberx+1})
   }
   function decrease(event) {
     event.preventDefault();
     if (numberx > 1) {
       setNumberx((number) => number - 1);
-      setForm({...form,adet:numberx})
+      setForm({...form,adet:numberx-1})
     }
   }
   
@@ -300,7 +304,7 @@ function checkMate(event){
             <div className="sipNot">
               <FormGroup>
                 <Label className="siparisNotu" htmlFor="not">
-                  Siparis Notu
+                  Sipariş Notu
                   <Input
                     className="notin"
                     id="not"
@@ -332,8 +336,10 @@ function checkMate(event){
             
             
             <div className="yanYana">
+              
               <div className="artiEksi">
-                <FormGroup>
+              <h5>Menü Sayısı</h5>
+                <FormGroup className="about">
                   <AzBut onClick={decrease}>-</AzBut>
                   <Num>{numberx}</Num>
                   <CokBut onClick={increase}>+</CokBut>

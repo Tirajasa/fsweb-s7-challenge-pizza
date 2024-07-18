@@ -15,6 +15,7 @@ function Success(props) {
         <Banner src="../../../Assets/mile1-assets/logo.svg"></Banner>
         </div>
         <div className="wrap">
+          <p className="lez">Lezzet Yolda!!!</p>
           <div className="onay">
             <p>TEBRİKLER!</p>
             <p>SİPARİŞİNİZ ALINDI!</p>

@@ -855,21 +855,26 @@ siparis notu kismi */
 
 .yanYana{
     margin-top: 80px;
-    height:400px;
+    height:600px;
     width:450px; 
-    border: 3px solid rgb(209, 47, 47);
+   
     display: flex;
     
     
  }
 .artiEksi{
 height:60px;
-width: 170px;
-border: 3px solid rgb(209, 47, 47);
-margin: 10px;
+width: 200px;
 
+margin: 0px;
+
+display: flex;
+flex-wrap: nowrap;
+flex-direction: column;
 }
-
+.about{
+  width: 100%;
+}
 
 
 .inline{
@@ -882,6 +887,12 @@ align-items: center;
 height: 20vh;
 display: flex;
 flex-direction: column;
+}
+.lez{
+  font-family: "Barlow";
+  color:#fdc912;
+  font-size: 20px;
+  font-weight: 600;
 }
 .onay{
   display: flex;
@@ -908,24 +919,26 @@ color: white;
   border: 1px solid rgb(255, 255, 255);
   width: 450px;
   margin: 0 auto;
-  height: 50vh;
-
+  height: 55vh;
+  display: flex;
+align-items: center;
 
 }
 .ekstresi{
+  display: flex;
+flex-direction: column;
   background-color: transparent;
   text-align: center;
-  height: 60vh;
- 
 align-items: center;
-
-width:400px;
+justify-content: center;
+margin: 0 auto;
+max-width:350px;
 
 
 }
 .boslluk{
   background-color: #cd2828;
-  height: 10vh;
+  height: 5vh;
 }
  /* #root {
   max-width: 1280px;
