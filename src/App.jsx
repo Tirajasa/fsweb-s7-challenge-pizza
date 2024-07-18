@@ -26,6 +26,7 @@
     const [numberx,setNumberx]=useState(1);
     const [errors,setErrors]=useState({})
     const [form,setForm] =useState(initialForm);
+    const [fis,setFis] =useState({menu:0,extras:0});
     return (
       <>
       <Switch>
@@ -40,10 +41,10 @@
           numberx={numberx} setNumberx={setNumberx} 
           showed={showed} setShowed={setShowed}
           selectedItems={selectedItems} setSelectedItems={setSelectedItems} 
-          errors={errors} setErrors={setErrors}/>
+          errors={errors} setErrors={setErrors} fis={fis} setFis={setFis}/>
         </Route>
         <Route path="/success">
-          <Success form={form}/>
+          <Success fis={fis}form={form}/>
         </Route>
       </Switch>
           

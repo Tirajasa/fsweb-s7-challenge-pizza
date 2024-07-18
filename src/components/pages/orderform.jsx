@@ -37,7 +37,7 @@ function OrderForm(props) {
     setShowed,
     selectedItems,
     setSelectedItems,
-   form,setForm
+   form,setForm,fis,setFis
   } = props;
 
 
@@ -65,34 +65,28 @@ function checkMate(event){
 }
   let history = useHistory();
 
-  function increase() {
+  function increase(event) {
+    event.preventDefault();
     setNumberx((number) => number + 1);
+    setForm({...form,adet:numberx})
   }
-  function decrease() {
+  function decrease(event) {
+    event.preventDefault();
     if (numberx > 1) {
       setNumberx((number) => number - 1);
+      setForm({...form,adet:numberx})
     }
   }
-  function ekleReset(event) {
-    const {id}=event.target;
-    if (id === "resetButton"){
-     {/*--------------------yarim kaldi*/}
-    }
-    handleClear();
-    setNumberx(1);
-  }
-function handleClear(){
+  
+  
+ function successegit(){
+  history.push("/success");
+ }
 
-  setForm(initialForm);
-}
   function sipVerildi(event) {
     event.preventDefault();
-    if(!form.buyukluk){
-      setErrors({...errors,buyukluk:errorlar.buyukluk})
+    successegit();
 
-    }else{
-      setErrors({...errors})}
-    const { value }=event.target;
     setForm({
       ...form,
       username:form.username,
@@ -103,31 +97,42 @@ function handleClear(){
       toppings: form.toppings,
       not:form.not,
     }) ;
-  
+    setFis({
+      ...fis,
+      menu: selectedItems.price,
+  });
+
+
     console.log("Siparis detaylari:", {
       username:form.username,
       ad:selectedItems.ad,
       toppings: form.toppings,
-      adet:numberx,
+      adet:form.adet,
       buyukluk:form.buyukluk,
       kalinlik:form.kalinlik,
       not:form.not,
     });
-    history.push("/success");
+    console.log("here are the toppings:",fis.extras,"here menu:", fis.menu);
+    
  
-  
+ 
     console.log("fis:",form);
    
   
-    // handleClear();
-    // hatirlatma :fisi appjsx de ve sipverildinin icinde degistirdim. datanin nasil olmasi gerektigine karar ver!!!--------
   }
   function icerikGelsin(selectedItems) {
     setShowed(selectedItems);
     setForm({...form,ad:selectedItems.ad})
   }
   // ✔
-  
+  function showErrors(){
+    if(!form.buyukluk){
+      setErrors({...errors,buyukluk:errorlar.buyukluk})
+
+    }else{
+      setErrors({...errors})}
+
+  }
 
   useEffect(() => {
     if (selectedItems) {
@@ -135,7 +140,10 @@ function handleClear(){
     }
   }, [selectedItems]);
 
+  function handleClear(){
 
+    setForm(initialForm);
+  }
  
 
   return (
@@ -181,12 +189,14 @@ function handleClear(){
             <div className="boyut">
            { errors.buyukluk&&
               <p className="red">*{errors.buyukluk}*</p>}
-              <h3>Boyut Seç </h3>
+              <div>
+              <h3 className="inline">Boyut Seç </h3><p  className="red inline">*</p>
+              </div>
               <div className="boy">
                 <FormGroup>
                   <Label htmlFor="küçük " className="kuccukx ">
                     S
-                    <Input
+                    <Input 
                       id="küçük"
                       type="radio"
                       name="boyut"
@@ -202,7 +212,7 @@ function handleClear(){
                 <FormGroup>
                   <Label htmlFor="orta " className="kuccukx">
                     M
-                    <Input
+                    <Input 
                       id="orta"
                       type="radio"
                       name="boyut"
@@ -218,7 +228,7 @@ function handleClear(){
                 <FormGroup>
                   <Label htmlFor="büyük " className="kuccukx">
                     L
-                    <Input
+                    <Input 
                       type="radio"
                       name="boyut"
                       value="büyük"
@@ -237,7 +247,7 @@ function handleClear(){
               <FormGroup>
                 <Label for="kalinlik">
                   Hamur Seç
-                  <Input
+                  <Input 
                     className="dropdown"
                     type="select"
                     id="kalinlik"
@@ -327,18 +337,17 @@ function handleClear(){
                   <AzBut onClick={decrease}>-</AzBut>
                   <Num>{numberx}</Num>
                   <CokBut onClick={increase}>+</CokBut>
+               
                 </FormGroup>
-                <Button id="resetButton" onClick={ekleReset}className="white">
-                  Ekle
-                </Button>
               </div>
               
               <div className="whole">
-                <MenuFis
+                <MenuFis 
+                fis={fis} form={form}
                   selectedItem={selectedItems}
                   setSelectedItem={setSelectedItems}
                 />
-                <SipBut type="submit" onSubmit={sipVerildi}>Siparis Ver</SipBut>
+                <SipBut type="submit" onClick={sipVerildi}>Siparis Ver</SipBut>
               </div>
             </div>
           </div>
