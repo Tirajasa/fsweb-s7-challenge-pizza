@@ -10,10 +10,16 @@ const SipBut = styled.button`
   background-color: rgb(253, 201, 18);
   border-radius: 6px;
 `;
-const Num = styled.button`
+const Num = styled.div`
   border: 1px solid #d9d9d9;
   background-color: white;
   color: #000000;
+  width: 50px;
+  height: 50px;
+  display: flex;
+
+ align-items: center;
+ justify-content: center;
 `;
 
 const AzBut = styled.button`

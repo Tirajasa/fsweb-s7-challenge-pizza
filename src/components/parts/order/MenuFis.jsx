@@ -35,7 +35,7 @@ function MenuFis({fis,form}) {
             <p>Ek Malzeme:</p><p>{form.toppings.join(', ')}</p>
             <div><p>Ek Malzeme Toplami:</p> <p>{fis.extras}</p> </div>
           </div>
-          <div><p>Seçimler:{form.adet} adet</p> <p> {form.ad}</p> </div>
+          <div><p>Seçimler: {form.adet} adet</p> <p> {form.ad}</p> </div>
           
           <div><p>Menu Toplami:</p> <p>{fis.menu+fis.extras}*{form.adet}</p> </div>
        

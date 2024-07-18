@@ -874,6 +874,9 @@ flex-direction: column;
 }
 .about{
   width: 100%;
+  display: flex;
+  text-align: center;
+ 
 }
 
 
