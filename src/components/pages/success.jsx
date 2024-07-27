@@ -25,7 +25,7 @@ function Success(props) {
         </div>
         <div className="sipozet"> 
           <div className="cerceve">
-      <MenuFis fis={fis} form={form}/>
+      <MenuFis fis={fis} form={form} />
       </div>
       <div className="boslluk"></div>
       </div>

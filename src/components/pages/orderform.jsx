@@ -46,11 +46,10 @@ function OrderForm(props) {
     showed,
     setShowed,
     selectedItems,
-    setSelectedItems,
    form,setForm,fis,setFis
   } = props;
 
-
+  let history = useHistory();
   const errorlar={
     userName:"Gecerli bir isim giriniz, en az 3 harf icermelidir.",
     //direk order sayfasini acinca bir urun secmelisiniz erroru yazabiliriz veya hizli satin al butonu insa edebiliriz
@@ -58,33 +57,54 @@ function OrderForm(props) {
     kalinlik:"Urunun inceligini secmelisiniz",
     toppings:["en az 4 ek malzeme seciniz.","10 adetten fazla ek malzeme secemezsiniz.",],
     adet:"Ayni urun icin 10 adetten fazla pizza siparis veremezsiniz.",
-    not:"Siparis notunuz "
+    not:"Siparis notunuzu unutmayin "
       }
+
+
+function icerikGelsin (selectedItems) {
+   setShowed(selectedItems);
+   setForm({...form,ad:selectedItems.ad})
+   }
+
+ useEffect(() => {
+    if (selectedItems) {
+      icerikGelsin(selectedItems);
+    }
+  }, [selectedItems]);
+
 function checkMate(event){
   const {name}=event.target;
 
     if(form.toppings.includes(name)){
-      const isaretlenenler=form.toppings.filter(topping=>topping!=name)
-      setForm({...form,toppings:isaretlenenler})
+      const isaretliyseCikar=form.toppings.filter(topping=>topping!=name)
+      setForm({...form,toppings:isaretliyseCikar})
       
     }else{
       const newForm=[...form.toppings,name]
       setForm({...form,toppings:newForm})
     
   }
+  
+    fiyatEkle(event);
 }
-  let history = useHistory();
+
 
   function increase(event) {
     event.preventDefault();
-    setNumberx((number) => number + 1);
-    setForm({...form,adet:numberx+1})
+    setNumberx((numberx) => numberx + 1);
+    
+    setForm({...form,adet:numberx+1});
+ 
   }
+  
   function decrease(event) {
     event.preventDefault();
     if (numberx > 1) {
       setNumberx((number) => number - 1);
+    console.log("Numberx "+ numberx);
+
       setForm({...form,adet:numberx-1})
+      console.log("Form.adet: "+ form.adet);
     }
   }
   
@@ -92,6 +112,40 @@ function checkMate(event){
  function successegit(){
   history.push("/success");
  }
+ const fiyatEkle = (event) => {
+  if (event.target.checked) {
+    // Seçilen topping adını alalım
+    const selectedToppingName = event.target.name;
+    
+    // Seçilen topping'in fiyatını bulalım
+    const selectedTopping = showed.toppings.find(topping => topping.ad === selectedToppingName);
+    
+    if (selectedTopping) {
+      // Fiyatlar dizisinden sadece seçilen topping'in fiyatını alalım
+      const fiyat = selectedTopping.fiyat;
+      
+      // Mevcut toplam fiyatı güncelleyelim
+      setFis(prevState => ({
+        ...prevState,
+        extras: ((prevState.extras || 0) + fiyat),
+      }));
+    }
+  } else {
+    // Eğer checkbox işareti kaldırıldıysa, fiyatı çıkaralım
+    const deselectedToppingName = event.target.name;
+    const deselectedTopping = showed.toppings.find(topping => topping.ad === deselectedToppingName);
+    
+    if (deselectedTopping) {
+      const fiyat = deselectedTopping.fiyat;
+      
+      setFis(prevState => ({
+        ...prevState,
+        extras: ((prevState.extras || 0) - fiyat),
+      }));
+    }
+  }
+};
+
 
   function sipVerildi(event) {
     event.preventDefault();
@@ -100,17 +154,28 @@ function checkMate(event){
     setForm({
       ...form,
       username:form.username,
-      ad:selectedItems.ad,
+      ad:showed.ad,
       adet:form.adet,
       buyukluk: form.buyukluk,
       kalinlik: form.kalinlik,
       toppings: form.toppings,
       not:form.not,
     }) ;
+
+    const fiyatlar= form.toppings.map(topping=>topping.fiyat);
+
+    const total=fiyatlar.reduce((top,fiyat)=>{
+      top+fiyat
+    },0)
+    
+    
+    
     setFis({
       ...fis,
-      menu: selectedItems.price,
-  });
+      menu: showed.price,
+      extras:total,
+    });
+    console.log("Fis:"+fis);
 
 
     console.log("Siparis detaylari:", {
@@ -130,10 +195,7 @@ function checkMate(event){
    
   
   }
-  function icerikGelsin(selectedItems) {
-    setShowed(selectedItems);
-    setForm({...form,ad:selectedItems.ad})
-  }
+ 
   // ✔
   function showErrors(){
     if(!form.buyukluk){
@@ -144,12 +206,7 @@ function checkMate(event){
 
   }
 
-  useEffect(() => {
-    if (selectedItems) {
-      icerikGelsin(selectedItems);
-    }
-  }, [selectedItems]);
-
+ 
   function handleClear(){
 
     setForm(initialForm);
@@ -328,9 +385,9 @@ function checkMate(event){
                   UserName
                   <Input
                     className="userin"
-                    id="username"
+                    id="userName"
                     type="text"
-                    name="username"
+                    name="userName"
                     placeholder="Username giriniz"
                     onChange={(e)=>{setForm({...form,userName:e.target.value})}}
                   />
@@ -356,8 +413,8 @@ function checkMate(event){
               <div className="whole">
                 <MenuFis 
                 fis={fis} form={form}
-                  selectedItem={selectedItems}
-                  setSelectedItem={setSelectedItems}
+            
+                  
                 />
                 <SipBut type="submit" onClick={sipVerildi}>Siparis Ver</SipBut>
               </div>

@@ -16,7 +16,7 @@
       buyukluk:"",
       kalinlik:"-Hamur Kalınlığı Seç-",
       toppings:[],
-      adet:"",
+      adet:1,
       not:""
     }
     const [selectedCategory,setSelectedCategory]=useState(pizzaci.category);
@@ -40,7 +40,7 @@
           form={form} setForm={setForm}
           numberx={numberx} setNumberx={setNumberx} 
           showed={showed} setShowed={setShowed}
-          selectedItems={selectedItems} setSelectedItems={setSelectedItems} 
+          selectedItems={selectedItems} 
           errors={errors} setErrors={setErrors} fis={fis} setFis={setFis}/>
         </Route>
         <Route path="/success">
