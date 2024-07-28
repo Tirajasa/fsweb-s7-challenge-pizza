@@ -63,7 +63,8 @@ function OrderForm(props) {
 
 function icerikGelsin (selectedItems) {
    setShowed(selectedItems);
-   setForm({...form,ad:selectedItems.ad})
+   setForm({...form,ad:selectedItems.ad});
+   setFis({...fis,menu:selectedItems.price.toFixed(2)});
    }
 
  useEffect(() => {
@@ -86,6 +87,7 @@ function checkMate(event){
   }
   
     fiyatEkle(event);
+    
 }
 
 
@@ -101,10 +103,10 @@ function checkMate(event){
     event.preventDefault();
     if (numberx > 1) {
       setNumberx((number) => number - 1);
-    console.log("Numberx "+ numberx);
+  
 
       setForm({...form,adet:numberx-1})
-      console.log("Form.adet: "+ form.adet);
+   
     }
   }
   
@@ -144,6 +146,7 @@ function checkMate(event){
       }));
     }
   }
+  
 };
 
 
@@ -159,6 +162,7 @@ function checkMate(event){
       buyukluk: form.buyukluk,
       kalinlik: form.kalinlik,
       toppings: form.toppings,
+      price:selectedItems.price,
       not:form.not,
     }) ;
 
@@ -167,16 +171,23 @@ function checkMate(event){
     const total=fiyatlar.reduce((top,fiyat)=>{
       top+fiyat
     },0)
-    
-    
+   
+  console.log("SP:"+selectedItems.price);
     
     setFis({
       ...fis,
-      menu: showed.price,
+      menu: selectedItems.price,
       extras:total,
     });
     console.log("Fis:"+fis);
-
+    if(selectedItems){
+      setFis(prevState=>({
+        ...prevState,
+        menu:selectedItems.price,
+      }));
+      setForm({...form,menu:selectedItems.price});
+    }
+    console.log("PRice:"+selectedItems.price);
 
     console.log("Siparis detaylari:", {
       username:form.username,
@@ -185,12 +196,13 @@ function checkMate(event){
       adet:form.adet,
       buyukluk:form.buyukluk,
       kalinlik:form.kalinlik,
+      price:selectedItems.price,
       not:form.not,
     });
     console.log("here are the toppings:",fis.extras,"here menu:", fis.menu);
     
  
- 
+    console.log("PRice2:"+selectedItems.price);
     console.log("fis:",form);
    
   
@@ -412,9 +424,7 @@ function checkMate(event){
               
               <div className="whole">
                 <MenuFis 
-                fis={fis} form={form}
-            
-                  
+                fis={fis} form={form} 
                 />
                 <SipBut type="submit" onClick={sipVerildi}>Siparis Ver</SipBut>
               </div>

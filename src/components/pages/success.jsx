@@ -13,23 +13,21 @@ function Success(props) {
     <>
       <div className="redflag">
         <Banner src="../../../Assets/mile1-assets/logo.svg"></Banner>
-        </div>
-        <div className="wrap">
-          <p className="lez">Lezzet Yolda!!!</p>
-          <div className="onay">
-            <p>TEBRİKLER!</p>
-            <p>SİPARİŞİNİZ ALINDI!</p>
-          </div>
-          <div className="siparis-ekstre">
-          </div>
-        </div>
-        <div className="sipozet"> 
-          <div className="cerceve">
-      <MenuFis fis={fis} form={form} />
       </div>
-      <div className="boslluk"></div>
+      <div className="wrap">
+        <p className="lez">Lezzet Yolda!!!</p>
+        <div className="onay">
+          <p>TEBRİKLER!</p>
+          <p>SİPARİŞİNİZ ALINDI!</p>
+        </div>
+        <div className="siparis-ekstre"></div>
       </div>
-    
+      <div className="sipozet">
+        <div className="cerceve">
+          <MenuFis fis={fis} form={form} />
+        </div>
+        <div className="boslluk"></div>
+      </div>
     </>
   );
 }
