@@ -11,7 +11,11 @@ const SipTop = styled.h2`
 
 function MenuFis(props) {
   const { fis, form} = props;
-
+  console.log("Toplam: "+((Number(fis.menu) + Number(fis.extras)) * Number(form.adet)).toFixed(2));
+  console.log("Fis:"+fis,"form"+form);
+  console.log("fis.extras:", fis.extras);
+console.log("fis.menu:", fis.menu);
+console.log("form.adet:", form.adet);
   return (
     <div className="ekstresi">
       {/* hatirlatma :her secilen menu icin maple donmeyi unutma -----------------*/}

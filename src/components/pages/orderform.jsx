@@ -77,6 +77,7 @@ function icerikGelsin (selectedItems) {
   useEffect(() => {
     if (selectedItems) {
       localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    
     }
   }, [selectedItems]);
 
@@ -134,7 +135,7 @@ function checkMate(event){
   history.push("/success");
  }
  const fiyatEkle = (event) => {
-  event.preventDefault();
+
   if (event.target.checked) {
     // Seçilen topping adını alalım
     const selectedToppingName = event.target.name;
@@ -149,7 +150,7 @@ function checkMate(event){
       // Mevcut toplam fiyatı güncelleyelim
       setFis(prevState => ({
         ...prevState,
-        extras: ((prevState.extras || 0) + fiyat),
+        extras: ((prevState.extras || 0) + (fiyat)),
       }));
     }
   } else {
@@ -162,7 +163,7 @@ function checkMate(event){
       
       setFis(prevState => ({
         ...prevState,
-        extras: ((prevState.extras || 0) - fiyat),
+        extras: ((prevState.extras || 0) - (fiyat)),
       }));
     }
  
@@ -182,22 +183,24 @@ function checkMate(event){
       adet:form.adet,
       buyukluk: form.buyukluk,
       kalinlik: form.kalinlik,
+      price:selectedItems.price,
       toppings: form.toppings,
      
       not:form.not,
     }) ;
 
-    const fiyatlar= form.toppings.map(topping=>topping.fiyat);
+    const fiyatlar= selectedItems.toppings.map(topping=>topping.fiyat);
 
     const total=fiyatlar.reduce((top,fiyat)=>{
-      top+fiyat
+      top+=fiyat
+      return total;
     },0)
    
   // console.log("SP:"+Number(selectedItems.price));
     
     setFis({
       ...fis,
-       menu: selectedItems.price,
+       menu: Number(selectedItems.price),
       extras:total,
     });
     console.log("Fis:"+fis);
@@ -217,7 +220,7 @@ function checkMate(event){
       adet:form.adet,
       buyukluk:form.buyukluk,
       kalinlik:form.kalinlik,
-      
+      price:selectedItems.price,
       not:form.not,
     });
     console.log("here are the toppings:",fis.extras,"here menu:", fis.menu);
