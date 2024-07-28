@@ -17,7 +17,7 @@
       kalinlik:"-Hamur Kalınlığı Seç-",
       toppings:[],
       adet:1,
-      price:0,
+      //price:0,
       not:""
     }
     const [selectedCategory,setSelectedCategory]=useState(pizzaci.category);

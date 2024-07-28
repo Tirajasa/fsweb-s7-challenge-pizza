@@ -26,7 +26,7 @@ function MenuFis(props) {
         <p>{form.toppings.join(", ")}</p>
         <div>
           <p>Ek Malzeme Toplami:</p>{" "}
-          <p>{(fis.extras * form.adet).toFixed(2)}</p>{" "}
+          <p>{(Number(fis.extras) * Number(form.adet)).toFixed(2)}</p>{" "}
         </div>
       </div>
       <div>
@@ -35,7 +35,7 @@ function MenuFis(props) {
 
       <div>
         <p>Menu Toplami:</p>{" "}
-        <p>{((Number(fis.menu) + fis.extras) * form.adet).toFixed(2)}</p>{" "}
+        <p>{((Number(fis.menu) + Number(fis.extras)) * Number(form.adet)).toFixed(2)}</p>{" "}
       </div>
     </div>
   );

@@ -64,7 +64,7 @@ function OrderForm(props) {
 function icerikGelsin (selectedItems) {
    setShowed(selectedItems);
    setForm({...form,ad:selectedItems.ad});
-   setFis({...fis,menu:selectedItems.price.toFixed(2)});
+   setFis({...fis,menu:Number(selectedItems.price).toFixed(2)});
    }
 
  useEffect(() => {
@@ -84,8 +84,10 @@ function icerikGelsin (selectedItems) {
     const savedItems = localStorage.getItem('selectedItems');
     if (savedItems) {
       setShowed(JSON.parse(savedItems));
+      setForm(initialForm);
       setForm({...form,ad:JSON.parse(savedItems).ad});
-      setFis({...fis,menu:JSON.parse(savedItems).price.toFixed(2)});
+      setFis({...fis,menu:Number(JSON.parse(savedItems).price).toFixed(2)});
+    
 
     }
   }, []);
@@ -132,6 +134,7 @@ function checkMate(event){
   history.push("/success");
  }
  const fiyatEkle = (event) => {
+  event.preventDefault();
   if (event.target.checked) {
     // Seçilen topping adını alalım
     const selectedToppingName = event.target.name;
@@ -162,6 +165,7 @@ function checkMate(event){
         extras: ((prevState.extras || 0) - fiyat),
       }));
     }
+ 
   }
   
 };
@@ -179,7 +183,7 @@ function checkMate(event){
       buyukluk: form.buyukluk,
       kalinlik: form.kalinlik,
       toppings: form.toppings,
-      price:selectedItems.price,
+     
       not:form.not,
     }) ;
 
@@ -189,21 +193,21 @@ function checkMate(event){
       top+fiyat
     },0)
    
-  console.log("SP:"+selectedItems.price);
+  // console.log("SP:"+Number(selectedItems.price));
     
     setFis({
       ...fis,
-      menu: selectedItems.price,
+       menu: selectedItems.price,
       extras:total,
     });
     console.log("Fis:"+fis);
-    if(selectedItems){
-      setFis(prevState=>({
-        ...prevState,
-        menu:selectedItems.price,
-      }));
-      setForm({...form,menu:selectedItems.price});
-    }
+    // if(selectedItems){
+    //   setFis(prevState=>({
+    //     ...prevState,
+    //     menu:selectedItems.price,
+    //   }));
+    //   setForm({...form,menu:selectedItems.price});
+    // }
     console.log("PRice:"+selectedItems.price);
 
     console.log("Siparis detaylari:", {
@@ -213,7 +217,7 @@ function checkMate(event){
       adet:form.adet,
       buyukluk:form.buyukluk,
       kalinlik:form.kalinlik,
-      price:selectedItems.price,
+      
       not:form.not,
     });
     console.log("here are the toppings:",fis.extras,"here menu:", fis.menu);
