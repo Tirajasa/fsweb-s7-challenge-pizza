@@ -9,6 +9,7 @@ const SipBut = styled.button`
   color: white;
   background-color: rgb(253, 201, 18);
   border-radius: 6px;
+  width: 287px;
 `;
 const Num = styled.div`
   border: 1px solid #d9d9d9;

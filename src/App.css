@@ -585,7 +585,7 @@ height: 600px;
 justify-content: baseline;
 text-align: start;
 margin: 0 auto;
-border: 1px solid slateblue;
+
 
 }
 .absolute{
@@ -629,7 +629,7 @@ margin-top: 10px;
 .ortaAlan{
   width: 450px;
   min-height: 600px;
-  border: 1px solid black;
+
   margin: 0 auto;
   
   
@@ -694,14 +694,14 @@ align-items: baseline;
  }
   */
   .kuccuk{
-    background-color: aquamarine !important;
+    background-color: #f9f7f1 !important;
   width: 30px;
   height: 30px;
   cursor: pointer;
   
   }
  .kuccuk:checked{
-  background-color: aquamarine !important;
+  background-color: #fbe6a8 !important;
   width: 30px;
   height: 30px;
  } 
@@ -709,7 +709,7 @@ align-items: baseline;
 
 
 .kuccuk:hover {
-  background-color: aquamarine;
+  background-color: #fbe6a8;
   border:3px solid rgb(23, 107, 79) ;
  border-radius: 50%;
  width: 30px;
@@ -826,10 +826,10 @@ siparis notu kismi */
   align-items: baseline;
 
   width: 450px ;
-  /* border: 1px solid black; */
   height: 120px;
   text-align: start;
   margin:10px 0;
+ 
   
 
   
@@ -837,20 +837,24 @@ siparis notu kismi */
 .userIn{
   height: 80px;
   width: 450px;
-  /* border: 1px solid black; */
+padding: 1px;
+border-bottom: 1px solid lightgray;
+  
   
 }
 .siparisNotu{
   font-family: "Barlow" !important;
   font-size: 600 !important;
   font-size: 20px;
-  
+ 
   height: 100px;
-
+ 
 }
 .notin{
   background-color: #faf7f2 !important;
   width: 450px !important;
+  
+
   }
 
 .yanYana{
@@ -943,6 +947,13 @@ max-width:350px;
   background-color: #cd2828;
   height: 5vh;
 }
+.whole{
+  border: 1px solid lightgray;
+  height: fit-content;
+  border-radius: 6px;
+}
+
+
  /* #root {
   max-width: 1280px;
   margin: 0 auto;
