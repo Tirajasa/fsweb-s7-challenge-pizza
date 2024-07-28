@@ -70,8 +70,25 @@ function icerikGelsin (selectedItems) {
  useEffect(() => {
     if (selectedItems) {
       icerikGelsin(selectedItems);
+      
     }
   }, [selectedItems]);
+
+  useEffect(() => {
+    if (selectedItems) {
+      localStorage.setItem('selectedItems', JSON.stringify(selectedItems));
+    }
+  }, [selectedItems]);
+
+  useEffect(() => {
+    const savedItems = localStorage.getItem('selectedItems');
+    if (savedItems) {
+      setShowed(JSON.parse(savedItems));
+      setForm({...form,ad:JSON.parse(savedItems).ad});
+      setFis({...fis,menu:JSON.parse(savedItems).price.toFixed(2)});
+
+    }
+  }, []);
 
 function checkMate(event){
   const {name}=event.target;
